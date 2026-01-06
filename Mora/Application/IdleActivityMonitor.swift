@@ -2,7 +2,7 @@ import AppKit
 import Combine
 
 /// Monitors global user activity and emits idle/active/system events.
-final class IdleActivityMonitor {
+final class IdleActivityMonitor: @unchecked Sendable { // Access is funneled through a serial queue; @unchecked silences Sendable warnings.
     enum EventKind {
         case thresholdExceeded(idleDuration: TimeInterval)
         case systemSleep
@@ -74,7 +74,7 @@ final class IdleActivityMonitor {
         let mask: NSEvent.EventTypeMask = [.mouseMoved, .leftMouseDown, .rightMouseDown, .otherMouseDown, .keyDown, .scrollWheel]
         if let monitor = NSEvent.addGlobalMonitorForEvents(matching: mask, handler: { [weak self] _ in
             guard let self else { return }
-            self.handleActivity()
+            self.timerQueue.async { [weak self] in self?.handleActivity() }
         }) {
             monitors.append(monitor)
         }
@@ -83,10 +83,10 @@ final class IdleActivityMonitor {
     private func installWorkspaceObservers() {
         let center = workspace.notificationCenter
         let willSleep = center.addObserver(forName: NSWorkspace.willSleepNotification, object: workspace, queue: .main) { [weak self] _ in
-            self?.handleSystemSleep()
+            self?.timerQueue.async { [weak self] in self?.handleSystemSleep() }
         }
         let didWake = center.addObserver(forName: NSWorkspace.didWakeNotification, object: workspace, queue: .main) { [weak self] _ in
-            self?.handleSystemWake()
+            self?.timerQueue.async { [weak self] in self?.handleSystemWake() }
         }
         workspaceObservers.append(contentsOf: [willSleep, didWake])
     }
