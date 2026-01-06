@@ -33,13 +33,6 @@ Minimalist macOS menu bar focus timer (25/5/15) with full-screen break overlays 
 2) **001-idle-autopause** — detect keyboard/mouse inactivity, auto-pause focus blocks, and prompt on return (design/spec drafted; implementation pending).
 3) **Next candidates** — richer preferences (thresholds, autostart), progress summaries, and UX polish from usability feedback.
 
-## Commands / Shortcuts (intended)
-- Start focus
-- Pause / Resume
-- Restart phase
-- Skip break
-- Quit
-
 ## Getting Started
 **Requirements:** macOS 13+, Xcode 15+/Swift 5.10+, SwiftPM dependencies (`HotKey`, `combine-schedulers`).
 
@@ -56,3 +49,5 @@ Tests: `swift test`
 
 ## Screenshots
 - Current menu bar panel (WIP): shows today's circles/moras, live countdown, Pause/Restart work session, Start short/long break, and Quit.
+
+![Mora menu panel](docs/menu-panel.png)
