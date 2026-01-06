@@ -5,9 +5,6 @@ struct MenuBarView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(viewModel.phaseDescription)
-                .font(.headline)
-                .foregroundStyle(.secondary)
             Text(viewModel.countdownText)
                 .font(.system(size: 36, weight: .semibold, design: .rounded))
                 .monospacedDigit()

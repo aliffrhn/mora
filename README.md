@@ -55,4 +55,4 @@ Tests: `swift test`
 - Swift 5.10, AppKit + SwiftUI menu bar app, Combine for state propagation, HotKey for global shortcuts.
 
 ## Screenshots
-- Coming soon.
+- Current menu bar panel (WIP): shows today's circles/moras, live countdown, Pause/Restart work session, Start short/long break, and Quit.

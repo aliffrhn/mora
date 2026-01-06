@@ -17,6 +17,7 @@ final class MenuBarController {
 
     private var cancellables: Set<AnyCancellable> = []
     private var breakOverlayModel: BreakOverlayModel?
+    private var suppressedOverlayPhase: TimerPhase?
     private var pendingIdleEventID: UUID?
 
     init(viewModel: AppModel = AppModel(),
@@ -88,6 +89,27 @@ final class MenuBarController {
     func dismissBreakOverlay() {
         overlayController.dismiss()
         breakOverlayModel = nil
+        suppressedOverlayPhase = unwrapped(phase: cycleMachine.timerState.phase)
+    }
+
+    func pauseFor(duration: TimeInterval, now: Date = Date()) {
+        clearPendingIdleEvent()
+        cycleMachine.pause(now: now)
+    }
+
+    func pauseUntilTomorrow(now: Date = Date()) {
+        clearPendingIdleEvent()
+        cycleMachine.pause(now: now)
+    }
+
+    func startShortBreak(now: Date = Date()) {
+        clearPendingIdleEvent()
+        cycleMachine.startManualShortBreak(now: now)
+    }
+
+    func startLongBreak(now: Date = Date()) {
+        clearPendingIdleEvent()
+        cycleMachine.startManualLongBreak(now: now)
     }
 
     private func bind() {
@@ -145,10 +167,10 @@ final class MenuBarController {
             self.audioService.play(event: .focusEnd)
         }
 
-        cycleMachine.onBreakComplete = { [weak self] phase in
+        cycleMachine.onBreakComplete = { [weak self] phase, wasManual in
             guard let self else { return }
             self.audioService.play(event: .breakEnd)
-            if case .longBreak = phase {
+            if case .longBreak = phase, !wasManual {
                 if self.progressTracker.recordLongBreakCompletion() {
                     self.audioService.play(event: .cycleComplete)
                 }
@@ -170,11 +192,17 @@ final class MenuBarController {
         let effectivePhase = unwrapped(phase: state.phase)
         switch effectivePhase {
         case .shortBreak, .longBreak:
+            if suppressedOverlayPhase == effectivePhase {
+                breakOverlayModel?.update(remaining: state.remaining)
+                return
+            }
             if breakOverlayModel == nil {
+                suppressedOverlayPhase = nil
                 showBreakOverlay(for: state)
             }
             breakOverlayModel?.update(remaining: state.remaining)
         default:
+            suppressedOverlayPhase = nil
             if breakOverlayModel != nil {
                 hideBreakOverlay()
             }
@@ -204,6 +232,7 @@ final class MenuBarController {
     private func hideBreakOverlay() {
         overlayController.dismiss()
         breakOverlayModel = nil
+        suppressedOverlayPhase = nil
     }
 
     private func unwrapped(phase: TimerPhase) -> TimerPhase {
@@ -260,4 +289,5 @@ final class MenuBarController {
     private func clearPendingIdleEvent() {
         pendingIdleEventID = nil
     }
+
 }

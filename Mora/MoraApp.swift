@@ -20,18 +20,29 @@ struct MoraApp: App {
         MenuBarExtra {
             StatusMenuContent(viewModel: appModel, preferences: menuController.preferenceStore)
         } label: {
-            let labelText: String = {
+            let (iconName, text): (String?, String) = {
                 if appModel.isPaused {
-                    return "⏸︎ \(appModel.countdownText)"
+                    return ("pause.fill", appModel.countdownText)
                 } else if appModel.isRunning {
-                    return appModel.isOnBreak ? "☕︎ \(appModel.countdownText)" : appModel.countdownText
+                    if appModel.isOnBreak {
+                        return ("cup.and.saucer.fill", appModel.countdownText)
+                    } else {
+                        return (nil, appModel.countdownText)
+                    }
                 } else {
-                    return "Mora"
+                    return (nil, "Mora")
                 }
             }()
 
-            Text(labelText)
-                .monospacedDigit()
+            HStack(spacing: 6) {
+                if let iconName {
+                    Image(systemName: iconName)
+                        .font(.system(size: 14, weight: .semibold))
+                }
+                Text(text)
+                    .font(.system(size: 15, weight: .semibold, design: .rounded))
+                    .monospacedDigit()
+            }
         }
         .menuBarExtraStyle(.window)
 

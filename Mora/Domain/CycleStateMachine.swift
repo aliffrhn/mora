@@ -19,9 +19,13 @@ final class CycleStateMachine: ObservableObject {
     private var activePhase: TimerPhase = .idle
     private var pausedContext: (phase: TimerPhase, remaining: TimeInterval)?
     private var currentFocusIndex: Int = 0
+    private var lastTickDate: Date?
+    private var watchdog: AnyCancellable?
+    private var manualBreakResumeBlock: Int?
+    private var manualBreakActive: Bool = false
 
     var onFocusBlockComplete: ((Int) -> Void)?
-    var onBreakComplete: ((TimerPhase) -> Void)?
+    var onBreakComplete: ((TimerPhase, Bool) -> Void)?
 
     init(timerEngine: TimerEngineType = TimerEngine(),
          configuration: Configuration = .pomodoro,
@@ -31,6 +35,7 @@ final class CycleStateMachine: ObservableObject {
         self.config = configuration
         self.timerState = TimerState(phase: .idle, remaining: configuration.focusDuration, targetDate: now, startedAt: now)
         bind()
+        startWatchdog()
         if let restored = restoredState {
             restore(from: restored, now: now)
         }
@@ -86,6 +91,22 @@ final class CycleStateMachine: ObservableObject {
         default:
             break
         }
+        manualBreakActive = false
+        manualBreakResumeBlock = nil
+    }
+
+    func startManualShortBreak(now: Date = Date()) {
+        let resumeBlock = max(currentFocusIndex, 1)
+        manualBreakResumeBlock = resumeBlock
+        manualBreakActive = true
+        transition(to: .shortBreak(block: resumeBlock), duration: config.shortBreakDuration, now: now)
+    }
+
+    func startManualLongBreak(now: Date = Date()) {
+        let resumeBlock = max(currentFocusIndex, 1)
+        manualBreakResumeBlock = resumeBlock
+        manualBreakActive = true
+        transition(to: .longBreak, duration: config.longBreakDuration, now: now)
     }
 
     private func bind() {
@@ -93,6 +114,7 @@ final class CycleStateMachine: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] tick in
                 guard let self else { return }
+                self.lastTickDate = Date()
                 guard case .paused = self.activePhase else {
                     self.timerState = TimerState(phase: self.activePhase, remaining: tick.remaining, targetDate: tick.targetDate, startedAt: tick.startedAt)
                     return
@@ -118,11 +140,21 @@ final class CycleStateMachine: ObservableObject {
                 beginShortBreak(for: block)
             }
         case .shortBreak(let block):
-            onBreakComplete?(.shortBreak(block: block))
-            beginFocus(block: block + 1)
+            let manual = manualBreakActive
+            let resumeBlock = manualBreakResumeBlock
+            manualBreakActive = false
+            manualBreakResumeBlock = nil
+            onBreakComplete?(.shortBreak(block: block), manual)
+            let nextBlock = manual ? (resumeBlock ?? max(currentFocusIndex, 1)) : block + 1
+            beginFocus(block: nextBlock)
         case .longBreak:
-            onBreakComplete?(.longBreak)
-            beginFocus(block: 1)
+            let manual = manualBreakActive
+            let resumeBlock = manualBreakResumeBlock
+            manualBreakActive = false
+            manualBreakResumeBlock = nil
+            onBreakComplete?(.longBreak, manual)
+            let nextBlock = manual ? (resumeBlock ?? max(currentFocusIndex, 1)) : 1
+            beginFocus(block: nextBlock)
         case .idle, .paused:
             break
         }
@@ -148,6 +180,7 @@ final class CycleStateMachine: ObservableObject {
         pausedContext = nil
         timerEngine.start(duration: duration, now: now)
         timerState = TimerState(phase: phase, remaining: duration, targetDate: now.addingTimeInterval(duration), startedAt: now)
+        lastTickDate = now
     }
 
     private func restore(from state: TimerState, now: Date) {
@@ -188,6 +221,7 @@ final class CycleStateMachine: ObservableObject {
         } else {
             timerEngine.start(duration: remaining, now: now)
             timerState = TimerState(phase: phase, remaining: remaining, targetDate: now.addingTimeInterval(remaining), startedAt: now)
+            lastTickDate = now
         }
     }
 
@@ -203,9 +237,32 @@ final class CycleStateMachine: ObservableObject {
             } else {
                 timerEngine.start(duration: remaining, now: now)
                 timerState = TimerState(phase: activePhase, remaining: remaining, targetDate: now.addingTimeInterval(remaining), startedAt: now)
+                lastTickDate = now
             }
         default:
             break
+        }
+    }
+
+    private func startWatchdog() {
+        watchdog = Timer.publish(every: 3, on: .main, in: .common)
+            .autoconnect()
+            .sink { [weak self] _ in
+                self?.checkForStall()
+            }
+    }
+
+    private func checkForStall(now: Date = Date()) {
+        switch activePhase {
+        case .focus, .shortBreak, .longBreak:
+            break
+        default:
+            return
+        }
+        guard !isPaused else { return }
+        guard let lastTickDate else { return }
+        if now.timeIntervalSince(lastTickDate) >= 3 {
+            refreshAfterWake(now: now)
         }
     }
 }
