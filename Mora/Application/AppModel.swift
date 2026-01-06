@@ -1,0 +1,92 @@
+import Foundation
+import Combine
+
+@MainActor
+final class AppModel: ObservableObject {
+    @Published var phaseDescription: String = "Idle"
+    @Published var countdownText: String = "25:00"
+    @Published var isRunning: Bool = false
+    @Published var isPaused: Bool = false
+    @Published var statusMessage: String = "Start a focus block"
+    @Published var isOnBreak: Bool = false
+    @Published var todaysBlocks: Int = 0
+    @Published var morasEarned: Int = 0
+
+    weak var controller: MenuBarController?
+
+    func start() {
+        controller?.start()
+    }
+
+    func pause() {
+        controller?.pause()
+    }
+
+    func resume() {
+        controller?.resume()
+    }
+
+    func restart() {
+        controller?.restart()
+    }
+
+    func skipBreak() {
+        controller?.skipBreak()
+    }
+
+    func apply(timerState: TimerState) {
+        countdownText = Self.format(duration: timerState.remaining)
+        phaseDescription = phaseLabel(for: timerState.phase)
+        isPaused = {
+            if case .paused = timerState.phase { return true }
+            return false
+        }()
+        isOnBreak = {
+            if case .shortBreak = timerState.phase { return true }
+            if case .longBreak = timerState.phase { return true }
+            return false
+        }()
+        isRunning = !isPaused && timerState.phase != .idle
+        statusMessage = status(for: timerState.phase)
+    }
+
+    func apply(progress: DailyProgress) {
+        todaysBlocks = progress.completedBlocks
+        morasEarned = progress.morasEarned
+    }
+
+    private func phaseLabel(for phase: TimerPhase) -> String {
+        switch phase {
+        case .idle:
+            return "Idle"
+        case .focus(let block):
+            return "Focus \(block)"
+        case .shortBreak(let block):
+            return "Break \(block)"
+        case .longBreak:
+            return "Long Break"
+        case .paused(let original):
+            return "Paused (\(phaseLabel(for: original)))"
+        }
+    }
+
+    private func status(for phase: TimerPhase) -> String {
+        switch phase {
+        case .idle:
+            return "Start a focus block"
+        case .focus:
+            return "Deep work in progress"
+        case .shortBreak, .longBreak:
+            return "Take a breath"
+        case .paused:
+            return "Timer paused"
+        }
+    }
+
+    private static func format(duration: TimeInterval) -> String {
+        let totalSeconds = max(0, Int(duration.rounded(.down)))
+        let minutes = totalSeconds / 60
+        let seconds = totalSeconds % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+}

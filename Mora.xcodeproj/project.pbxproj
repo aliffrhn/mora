@@ -1,0 +1,611 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+	0020B0012B1F6A3700E7A8D0 /* MoraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B1012B1F6A3700E7A8D0 /* MoraApp.swift */; };
+	0020B0022B1F6A3700E7A8D0 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B1022B1F6A3700E7A8D0 /* AppModel.swift */; };
+	0020B0032B1F6A3700E7A8D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B1032B1F6A3700E7A8D0 /* AppDelegate.swift */; };
+	0020B0042B1F6A3700E7A8D0 /* MenuBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B1042B1F6A3700E7A8D0 /* MenuBarController.swift */; };
+	0020B0052B1F6A3700E7A8D0 /* OverlayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B1052B1F6A3700E7A8D0 /* OverlayController.swift */; };
+	0020B0062B1F6A3700E7A8D0 /* TimerPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B1062B1F6A3700E7A8D0 /* TimerPhase.swift */; };
+	0020B0072B1F6A3700E7A8D0 /* TimerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B1072B1F6A3700E7A8D0 /* TimerState.swift */; };
+	0020B0082B1F6A3700E7A8D0 /* TimerEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B1082B1F6A3700E7A8D0 /* TimerEngine.swift */; };
+	0020B0092B1F6A3700E7A8D0 /* CycleStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B1092B1F6A3700E7A8D0 /* CycleStateMachine.swift */; };
+	0020B00A2B1F6A3700E7A8D0 /* ProgressTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B10A2B1F6A3700E7A8D0 /* ProgressTracker.swift */; };
+	0020B00B2B1F6A3700E7A8D0 /* AudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B10B2B1F6A3700E7A8D0 /* AudioService.swift */; };
+	0020B00C2B1F6A3700E7A8D0 /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B10C2B1F6A3700E7A8D0 /* PersistenceService.swift */; };
+	0020B00D2B1F6A3700E7A8D0 /* SystemEventsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B10D2B1F6A3700E7A8D0 /* SystemEventsService.swift */; };
+	0020B00E2B1F6A3700E7A8D0 /* PreferenceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B10E2B1F6A3700E7A8D0 /* PreferenceStore.swift */; };
+	0020B00F2B1F6A3700E7A8D0 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B10F2B1F6A3700E7A8D0 /* MenuBarView.swift */; };
+	0020B0102B1F6A3700E7A8D0 /* StatusMenuContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B1102B1F6A3700E7A8D0 /* StatusMenuContent.swift */; };
+	0020B0112B1F6A3700E7A8D0 /* BreakOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B1112B1F6A3700E7A8D0 /* BreakOverlayView.swift */; };
+	0020B0122B1F6A3700E7A8D0 /* RingCountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B1122B1F6A3700E7A8D0 /* RingCountdownView.swift */; };
+	0020B0202B1F6A3700E7A8D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0020B11A2B1F6A3700E7A8D0 /* Assets.xcassets */; };
+	0020B0212B1F6A3700E7A8D0 /* focus_end.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0020B11B2B1F6A3700E7A8D0 /* focus_end.wav */; };
+	0020B0222B1F6A3700E7A8D0 /* break_end.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0020B11C2B1F6A3700E7A8D0 /* break_end.wav */; };
+	0020B0232B1F6A3700E7A8D0 /* cycle_complete.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0020B11D2B1F6A3700E7A8D0 /* cycle_complete.wav */; };
+	0020B0302B1F6A3700E7A8D0 /* MoraTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B1202B1F6A3700E7A8D0 /* MoraTests.swift */; };
+	0020B0312B1F6A3700E7A8D0 /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B1242B1F6A3700E7A8D0 /* Placeholder.swift */; };
+	0020B0322B1F6A3700E7A8D0 /* HotKeyCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B1252B1F6A3700E7A8D0 /* HotKeyCenter.swift */; };
+	0020B0332B1F6A3700E7A8D0 /* BreakOverlayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B1262B1F6A3700E7A8D0 /* BreakOverlayModel.swift */; };
+	0020B0342B1F6A3700E7A8D0 /* VisualEffectBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B1272B1F6A3700E7A8D0 /* VisualEffectBlur.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+	0020B1012B1F6A3700E7A8D0 /* MoraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoraApp.swift; sourceTree = "<group>"; };
+	0020B1022B1F6A3700E7A8D0 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+	0020B1032B1F6A3700E7A8D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+	0020B1042B1F6A3700E7A8D0 /* MenuBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarController.swift; sourceTree = "<group>"; };
+	0020B1052B1F6A3700E7A8D0 /* OverlayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayController.swift; sourceTree = "<group>"; };
+	0020B1062B1F6A3700E7A8D0 /* TimerPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPhase.swift; sourceTree = "<group>"; };
+	0020B1072B1F6A3700E7A8D0 /* TimerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerState.swift; sourceTree = "<group>"; };
+	0020B1082B1F6A3700E7A8D0 /* TimerEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerEngine.swift; sourceTree = "<group>"; };
+	0020B1092B1F6A3700E7A8D0 /* CycleStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleStateMachine.swift; sourceTree = "<group>"; };
+	0020B10A2B1F6A3700E7A8D0 /* ProgressTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressTracker.swift; sourceTree = "<group>"; };
+	0020B10B2B1F6A3700E7A8D0 /* AudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioService.swift; sourceTree = "<group>"; };
+	0020B10C2B1F6A3700E7A8D0 /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
+	0020B10D2B1F6A3700E7A8D0 /* SystemEventsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemEventsService.swift; sourceTree = "<group>"; };
+	0020B10E2B1F6A3700E7A8D0 /* PreferenceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceStore.swift; sourceTree = "<group>"; };
+	0020B10F2B1F6A3700E7A8D0 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
+	0020B1102B1F6A3700E7A8D0 /* StatusMenuContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusMenuContent.swift; sourceTree = "<group>"; };
+	0020B1112B1F6A3700E7A8D0 /* BreakOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakOverlayView.swift; sourceTree = "<group>"; };
+	0020B1122B1F6A3700E7A8D0 /* RingCountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingCountdownView.swift; sourceTree = "<group>"; };
+	0020B1132B1F6A3700E7A8D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+	0020B1142B1F6A3700E7A8D0 /* Mora.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Mora.entitlements; sourceTree = "<group>"; };
+	0020B11A2B1F6A3700E7A8D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+	0020B11B2B1F6A3700E7A8D0 /* focus_end.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = focus_end.wav; sourceTree = "<group>"; };
+	0020B11C2B1F6A3700E7A8D0 /* break_end.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = break_end.wav; sourceTree = "<group>"; };
+	0020B11D2B1F6A3700E7A8D0 /* cycle_complete.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cycle_complete.wav; sourceTree = "<group>"; };
+	0020B11E2B1F6A3700E7A8D0 /* Mora.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mora.app; sourceTree = BUILT_PRODUCTS_DIR; };
+	0020B11F2B1F6A3700E7A8D0 /* MoraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+	0020B1202B1F6A3700E7A8D0 /* MoraTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoraTests.swift; sourceTree = "<group>"; };
+	0020B1212B1F6A3700E7A8D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+	0020B1222B1F6A3700E7A8D0 /* MoraSnapshotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoraSnapshotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+	0020B1232B1F6A3700E7A8D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+	0020B1242B1F6A3700E7A8D0 /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
+	0020B1252B1F6A3700E7A8D0 /* HotKeyCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeyCenter.swift; sourceTree = "<group>"; };
+	0020B1262B1F6A3700E7A8D0 /* BreakOverlayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakOverlayModel.swift; sourceTree = "<group>"; };
+	0020B1272B1F6A3700E7A8D0 /* VisualEffectBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectBlur.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+	0020A0052B1F6A3700E7A8D0 /* Frameworks */ = {
+		isa = PBXFrameworksBuildPhase;
+		buildActionMask = 2147483647;
+		files = (
+		);
+		runOnlyForDeploymentPostprocessing = 0;
+	};
+	0020A00C2B1F6A3700E7A8D0 /* Frameworks */ = {
+		isa = PBXFrameworksBuildPhase;
+		buildActionMask = 2147483647;
+		files = (
+		);
+		runOnlyForDeploymentPostprocessing = 0;
+	};
+	0020A0112B1F6A3700E7A8D0 /* Frameworks */ = {
+		isa = PBXFrameworksBuildPhase;
+		buildActionMask = 2147483647;
+		files = (
+		);
+		runOnlyForDeploymentPostprocessing = 0;
+	};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+	0020A0022B1F6A3700E7A8D0 = {
+		isa = PBXGroup;
+		children = (
+			0020A0202B1F6A3700E7A8D0 /* Mora */,
+			0020A0302B1F6A3700E7A8D0 /* Tests */,
+			0020A0402B1F6A3700E7A8D0 /* Products */,
+		);
+		sourceTree = "<group>";
+	};
+	0020A0202B1F6A3700E7A8D0 /* Mora */ = {
+		isa = PBXGroup;
+		children = (
+			0020B1012B1F6A3700E7A8D0 /* MoraApp.swift */,
+			0020A0212B1F6A3700E7A8D0 /* Application */,
+			0020A0222B1F6A3700E7A8D0 /* Domain */,
+			0020A0232B1F6A3700E7A8D0 /* Services */,
+			0020A0242B1F6A3700E7A8D0 /* UI */,
+			0020A0252B1F6A3700E7A8D0 /* Preferences */,
+			0020A0262B1F6A3700E7A8D0 /* Resources */,
+			0020B1142B1F6A3700E7A8D0 /* Mora.entitlements */,
+			0020B1132B1F6A3700E7A8D0 /* Info.plist */,
+		);
+		path = Mora;
+		sourceTree = "<group>";
+	};
+	0020A0212B1F6A3700E7A8D0 /* Application */ = {
+		isa = PBXGroup;
+		children = (
+			0020B1022B1F6A3700E7A8D0 /* AppModel.swift */,
+			0020B1032B1F6A3700E7A8D0 /* AppDelegate.swift */,
+			0020B1042B1F6A3700E7A8D0 /* MenuBarController.swift */,
+			0020B1052B1F6A3700E7A8D0 /* OverlayController.swift */,
+			0020B1252B1F6A3700E7A8D0 /* HotKeyCenter.swift */,
+			0020B1262B1F6A3700E7A8D0 /* BreakOverlayModel.swift */,
+		);
+		path = Application;
+		sourceTree = "<group>";
+	};
+	0020A0222B1F6A3700E7A8D0 /* Domain */ = {
+		isa = PBXGroup;
+		children = (
+			0020B1062B1F6A3700E7A8D0 /* TimerPhase.swift */,
+			0020B1072B1F6A3700E7A8D0 /* TimerState.swift */,
+			0020B1082B1F6A3700E7A8D0 /* TimerEngine.swift */,
+			0020B1092B1F6A3700E7A8D0 /* CycleStateMachine.swift */,
+			0020B10A2B1F6A3700E7A8D0 /* ProgressTracker.swift */,
+		);
+		path = Domain;
+		sourceTree = "<group>";
+	};
+	0020A0232B1F6A3700E7A8D0 /* Services */ = {
+		isa = PBXGroup;
+		children = (
+			0020B10B2B1F6A3700E7A8D0 /* AudioService.swift */,
+			0020B10C2B1F6A3700E7A8D0 /* PersistenceService.swift */,
+			0020B10D2B1F6A3700E7A8D0 /* SystemEventsService.swift */,
+		);
+		path = Services;
+		sourceTree = "<group>";
+	};
+	0020A0242B1F6A3700E7A8D0 /* UI */ = {
+		isa = PBXGroup;
+		children = (
+			0020B10F2B1F6A3700E7A8D0 /* MenuBarView.swift */,
+			0020B1102B1F6A3700E7A8D0 /* StatusMenuContent.swift */,
+			0020B1112B1F6A3700E7A8D0 /* BreakOverlayView.swift */,
+			0020B1122B1F6A3700E7A8D0 /* RingCountdownView.swift */,
+			0020B1272B1F6A3700E7A8D0 /* VisualEffectBlur.swift */,
+		);
+		path = UI;
+		sourceTree = "<group>";
+	};
+	0020A0252B1F6A3700E7A8D0 /* Preferences */ = {
+		isa = PBXGroup;
+		children = (
+			0020B10E2B1F6A3700E7A8D0 /* PreferenceStore.swift */,
+		);
+		path = Preferences;
+		sourceTree = "<group>";
+	};
+	0020A0262B1F6A3700E7A8D0 /* Resources */ = {
+		isa = PBXGroup;
+		children = (
+			0020B11A2B1F6A3700E7A8D0 /* Assets.xcassets */,
+			0020A0272B1F6A3700E7A8D0 /* Sounds */,
+		);
+		path = Resources;
+		sourceTree = "<group>";
+	};
+	0020A0272B1F6A3700E7A8D0 /* Sounds */ = {
+		isa = PBXGroup;
+		children = (
+			0020B11B2B1F6A3700E7A8D0 /* focus_end.wav */,
+			0020B11C2B1F6A3700E7A8D0 /* break_end.wav */,
+			0020B11D2B1F6A3700E7A8D0 /* cycle_complete.wav */,
+		);
+		path = Sounds;
+		sourceTree = "<group>";
+	};
+	0020A0302B1F6A3700E7A8D0 /* Tests */ = {
+		isa = PBXGroup;
+		children = (
+			0020A0312B1F6A3700E7A8D0 /* MoraTests */,
+			0020A0322B1F6A3700E7A8D0 /* MoraSnapshotTests */,
+		);
+		path = Tests;
+		sourceTree = "<group>";
+	};
+	0020A0312B1F6A3700E7A8D0 /* MoraTests */ = {
+		isa = PBXGroup;
+		children = (
+			0020B1202B1F6A3700E7A8D0 /* MoraTests.swift */,
+			0020B1212B1F6A3700E7A8D0 /* Info.plist */,
+		);
+		path = MoraTests;
+		sourceTree = "<group>";
+	};
+	0020A0322B1F6A3700E7A8D0 /* MoraSnapshotTests */ = {
+		isa = PBXGroup;
+		children = (
+			0020B1242B1F6A3700E7A8D0 /* Placeholder.swift */,
+			0020B1232B1F6A3700E7A8D0 /* Info.plist */,
+		);
+		path = MoraSnapshotTests;
+		sourceTree = "<group>";
+	};
+	0020A0402B1F6A3700E7A8D0 /* Products */ = {
+		isa = PBXGroup;
+		children = (
+			0020B11E2B1F6A3700E7A8D0 /* Mora.app */,
+			0020B11F2B1F6A3700E7A8D0 /* MoraTests.xctest */,
+			0020B1222B1F6A3700E7A8D0 /* MoraSnapshotTests.xctest */,
+		);
+		name = Products;
+		sourceTree = "<group>";
+	};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+	0020A0012B1F6A3700E7A8D0 /* Mora */ = {
+		isa = PBXNativeTarget;
+		buildConfigurationList = 0020A0502B1F6A3700E7A8D0 /* Build configuration list for PBXNativeTarget "Mora" */;
+		buildPhases = (
+			0020A0042B1F6A3700E7A8D0 /* Sources */,
+			0020A0052B1F6A3700E7A8D0 /* Frameworks */,
+			0020A0062B1F6A3700E7A8D0 /* Resources */,
+		);
+		buildRules = (
+		);
+		dependencies = (
+		);
+		name = Mora;
+		productName = Mora;
+		productReference = 0020B11E2B1F6A3700E7A8D0 /* Mora.app */;
+		productType = "com.apple.product-type.application";
+	};
+	0020A00A2B1F6A3700E7A8D0 /* MoraTests */ = {
+		isa = PBXNativeTarget;
+		buildConfigurationList = 0020A0512B1F6A3700E7A8D0 /* Build configuration list for PBXNativeTarget "MoraTests" */;
+		buildPhases = (
+			0020A00B2B1F6A3700E7A8D0 /* Sources */,
+			0020A00C2B1F6A3700E7A8D0 /* Frameworks */,
+		);
+		buildRules = (
+		);
+		dependencies = (
+		);
+		name = MoraTests;
+		productName = MoraTests;
+		productReference = 0020B11F2B1F6A3700E7A8D0 /* MoraTests.xctest */;
+		productType = "com.apple.product-type.bundle.unit-test";
+	};
+	0020A00F2B1F6A3700E7A8D0 /* MoraSnapshotTests */ = {
+		isa = PBXNativeTarget;
+		buildConfigurationList = 0020A0522B1F6A3700E7A8D0 /* Build configuration list for PBXNativeTarget "MoraSnapshotTests" */;
+		buildPhases = (
+			0020A0102B1F6A3700E7A8D0 /* Sources */,
+			0020A0112B1F6A3700E7A8D0 /* Frameworks */,
+		);
+		buildRules = (
+		);
+		dependencies = (
+		);
+		name = MoraSnapshotTests;
+		productName = MoraSnapshotTests;
+		productReference = 0020B1222B1F6A3700E7A8D0 /* MoraSnapshotTests.xctest */;
+		productType = "com.apple.product-type.bundle.unit-test";
+	};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+	0020A0002B1F6A3700E7A8D0 /* Project object */ = {
+		isa = PBXProject;
+		attributes = {
+			BuildIndependentTargetsInParallel = YES;
+			LastSwiftUpdateCheck = 1500;
+			LastUpgradeCheck = 1500;
+			TargetAttributes = {
+				0020A0012B1F6A3700E7A8D0 = { ProvisioningStyle = Automatic; };
+				0020A00A2B1F6A3700E7A8D0 = { ProvisioningStyle = Automatic; };
+				0020A00F2B1F6A3700E7A8D0 = { ProvisioningStyle = Automatic; };
+			};
+		};
+		buildConfigurationList = 0020A0532B1F6A3700E7A8D0 /* Build configuration list for PBXProject "Mora" */;
+		compatibilityVersion = "Xcode 14.0";
+		developmentRegion = en;
+		hasScannedForEncodings = 0;
+		knownRegions = (
+			en,
+		);
+		mainGroup = 0020A0022B1F6A3700E7A8D0;
+		productRefGroup = 0020A0402B1F6A3700E7A8D0 /* Products */;
+		projectDirPath = "";
+		projectRoot = "";
+		targets = (
+			0020A0012B1F6A3700E7A8D0 /* Mora */,
+			0020A00A2B1F6A3700E7A8D0 /* MoraTests */,
+			0020A00F2B1F6A3700E7A8D0 /* MoraSnapshotTests */,
+		);
+	};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+	0020A0062B1F6A3700E7A8D0 /* Resources */ = {
+		isa = PBXResourcesBuildPhase;
+		buildActionMask = 2147483647;
+		files = (
+			0020B0202B1F6A3700E7A8D0 /* Assets.xcassets in Resources */,
+			0020B0212B1F6A3700E7A8D0 /* focus_end.wav in Resources */,
+			0020B0222B1F6A3700E7A8D0 /* break_end.wav in Resources */,
+			0020B0232B1F6A3700E7A8D0 /* cycle_complete.wav in Resources */,
+		);
+		runOnlyForDeploymentPostprocessing = 0;
+	};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+	0020A0042B1F6A3700E7A8D0 /* Sources */ = {
+		isa = PBXSourcesBuildPhase;
+		buildActionMask = 2147483647;
+		files = (
+			0020B0122B1F6A3700E7A8D0 /* RingCountdownView.swift in Sources */,
+			0020B0112B1F6A3700E7A8D0 /* BreakOverlayView.swift in Sources */,
+			0020B0102B1F6A3700E7A8D0 /* StatusMenuContent.swift in Sources */,
+			0020B00F2B1F6A3700E7A8D0 /* MenuBarView.swift in Sources */,
+			0020B00E2B1F6A3700E7A8D0 /* PreferenceStore.swift in Sources */,
+			0020B00D2B1F6A3700E7A8D0 /* SystemEventsService.swift in Sources */,
+			0020B00C2B1F6A3700E7A8D0 /* PersistenceService.swift in Sources */,
+			0020B00B2B1F6A3700E7A8D0 /* AudioService.swift in Sources */,
+			0020B00A2B1F6A3700E7A8D0 /* ProgressTracker.swift in Sources */,
+			0020B0092B1F6A3700E7A8D0 /* CycleStateMachine.swift in Sources */,
+			0020B0082B1F6A3700E7A8D0 /* TimerEngine.swift in Sources */,
+			0020B0072B1F6A3700E7A8D0 /* TimerState.swift in Sources */,
+			0020B0062B1F6A3700E7A8D0 /* TimerPhase.swift in Sources */,
+			0020B0052B1F6A3700E7A8D0 /* OverlayController.swift in Sources */,
+			0020B0042B1F6A3700E7A8D0 /* MenuBarController.swift in Sources */,
+			0020B0322B1F6A3700E7A8D0 /* HotKeyCenter.swift in Sources */,
+			0020B0332B1F6A3700E7A8D0 /* BreakOverlayModel.swift in Sources */,
+			0020B0342B1F6A3700E7A8D0 /* VisualEffectBlur.swift in Sources */,
+			0020B0032B1F6A3700E7A8D0 /* AppDelegate.swift in Sources */,
+			0020B0022B1F6A3700E7A8D0 /* AppModel.swift in Sources */,
+			0020B0012B1F6A3700E7A8D0 /* MoraApp.swift in Sources */,
+		);
+		runOnlyForDeploymentPostprocessing = 0;
+	};
+	0020A00B2B1F6A3700E7A8D0 /* Sources */ = {
+		isa = PBXSourcesBuildPhase;
+		buildActionMask = 2147483647;
+		files = (
+			0020B0302B1F6A3700E7A8D0 /* MoraTests.swift in Sources */,
+		);
+		runOnlyForDeploymentPostprocessing = 0;
+	};
+	0020A0102B1F6A3700E7A8D0 /* Sources */ = {
+		isa = PBXSourcesBuildPhase;
+		buildActionMask = 2147483647;
+		files = (
+			0020B0312B1F6A3700E7A8D0 /* Placeholder.swift in Sources */,
+		);
+		runOnlyForDeploymentPostprocessing = 0;
+	};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+	0020A0602B1F6A3700E7A8D0 /* Debug */ = {
+		isa = XCBuildConfiguration;
+		buildSettings = {
+			ALWAYS_SEARCH_USER_PATHS = NO;
+			CLANG_ANALYZER_NONNULL = YES;
+			CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+			CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+			CLANG_ENABLE_MODULES = YES;
+			CLANG_ENABLE_OBJC_ARC = YES;
+			CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+			CLANG_WARN_BOOL_CONVERSION = YES;
+			CLANG_WARN_COMMA = YES;
+			CLANG_WARN_CONSTANT_CONVERSION = YES;
+			CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+			CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+			CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+			CLANG_WARN_EMPTY_BODY = YES;
+			CLANG_WARN_ENUM_CONVERSION = YES;
+			CLANG_WARN_INFINITE_RECURSION = YES;
+			CLANG_WARN_INT_CONVERSION = YES;
+			CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+			CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+			CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+			CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+			CLANG_WARN_STRICT_PROTOTYPES = YES;
+			CLANG_WARN_SUSPICIOUS_MOVE = YES;
+			CLANG_WARN_UNREACHABLE_CODE = YES;
+			CODE_SIGN_IDENTITY = "-";
+			COPY_PHASE_STRIP = NO;
+			DEBUG_INFORMATION_FORMAT = dwarf;
+			ENABLE_STRICT_OBJC_MSGSEND = YES;
+			ENABLE_TESTABILITY = YES;
+			GCC_C_LANGUAGE_STANDARD = gnu11;
+			GCC_DYNAMIC_NO_PIC = NO;
+			GCC_NO_COMMON_BLOCKS = YES;
+			GCC_OPTIMIZATION_LEVEL = 0;
+			GCC_PREPROCESSOR_DEFINITIONS = (
+				"DEBUG=1",
+				"$(inherited)",
+			);
+			GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+			GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+			GCC_WARN_UNDECLARED_SELECTOR = YES;
+			GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+			GCC_WARN_UNUSED_FUNCTION = YES;
+			GCC_WARN_UNUSED_VARIABLE = YES;
+			MACOSX_DEPLOYMENT_TARGET = 13.0;
+			MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+			ONLY_ACTIVE_ARCH = YES;
+			SDKROOT = macosx;
+			SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+			SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+		};
+		name = Debug;
+	};
+	0020A0612B1F6A3700E7A8D0 /* Release */ = {
+		isa = XCBuildConfiguration;
+		buildSettings = {
+			ALWAYS_SEARCH_USER_PATHS = NO;
+			CLANG_ANALYZER_NONNULL = YES;
+			CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+			CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+			CLANG_ENABLE_MODULES = YES;
+			CLANG_ENABLE_OBJC_ARC = YES;
+			CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+			CLANG_WARN_BOOL_CONVERSION = YES;
+			CLANG_WARN_COMMA = YES;
+			CLANG_WARN_CONSTANT_CONVERSION = YES;
+			CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+			CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+			CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+			CLANG_WARN_EMPTY_BODY = YES;
+			CLANG_WARN_ENUM_CONVERSION = YES;
+			CLANG_WARN_INFINITE_RECURSION = YES;
+			CLANG_WARN_INT_CONVERSION = YES;
+			CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+			CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+			CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+			CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+			CLANG_WARN_STRICT_PROTOTYPES = YES;
+			CLANG_WARN_SUSPICIOUS_MOVE = YES;
+			CLANG_WARN_UNREACHABLE_CODE = YES;
+			CODE_SIGN_IDENTITY = "-";
+			COPY_PHASE_STRIP = NO;
+			DEBUG_INFORMATION_FORMAT = dwarf;
+			ENABLE_NS_ASSERTIONS = NO;
+			ENABLE_STRICT_OBJC_MSGSEND = YES;
+			GCC_C_LANGUAGE_STANDARD = gnu11;
+			GCC_NO_COMMON_BLOCKS = YES;
+			GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+			GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+			GCC_WARN_UNDECLARED_SELECTOR = YES;
+			GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+			GCC_WARN_UNUSED_FUNCTION = YES;
+			GCC_WARN_UNUSED_VARIABLE = YES;
+			MACOSX_DEPLOYMENT_TARGET = 13.0;
+			MTL_ENABLE_DEBUG_INFO = NO;
+			SDKROOT = macosx;
+			SWIFT_COMPILATION_MODE = wholemodule;
+			SWIFT_OPTIMIZATION_LEVEL = "-O";
+		};
+		name = Release;
+	};
+	0020A0622B1F6A3700E7A8D0 /* Debug */ = {
+		isa = XCBuildConfiguration;
+		buildSettings = {
+			ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+			CODE_SIGN_ENTITLEMENTS = Mora/Mora.entitlements;
+			CODE_SIGN_STYLE = Automatic;
+			INFOPLIST_FILE = Mora/Info.plist;
+			LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+			MACOSX_DEPLOYMENT_TARGET = 13.0;
+			PRODUCT_BUNDLE_IDENTIFIER = com.example.mora;
+			PRODUCT_NAME = "$(TARGET_NAME)";
+			SDKROOT = macosx;
+			SWIFT_EMIT_LOC_STRINGS = YES;
+			SWIFT_VERSION = 5.0;
+			TARGETED_DEVICE_FAMILY = "1,2";
+		};
+		name = Debug;
+	};
+	0020A0632B1F6A3700E7A8D0 /* Release */ = {
+		isa = XCBuildConfiguration;
+		buildSettings = {
+			ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+			CODE_SIGN_ENTITLEMENTS = Mora/Mora.entitlements;
+			CODE_SIGN_STYLE = Automatic;
+			INFOPLIST_FILE = Mora/Info.plist;
+			LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+			MACOSX_DEPLOYMENT_TARGET = 13.0;
+			PRODUCT_BUNDLE_IDENTIFIER = com.example.mora;
+			PRODUCT_NAME = "$(TARGET_NAME)";
+			SDKROOT = macosx;
+			SWIFT_EMIT_LOC_STRINGS = YES;
+			SWIFT_VERSION = 5.0;
+			TARGETED_DEVICE_FAMILY = "1,2";
+		};
+		name = Release;
+	};
+	0020A0642B1F6A3700E7A8D0 /* Debug */ = {
+		isa = XCBuildConfiguration;
+		buildSettings = {
+			INFOPLIST_FILE = Tests/MoraTests/Info.plist;
+			LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+			PRODUCT_BUNDLE_IDENTIFIER = com.example.moraTests;
+			PRODUCT_NAME = "$(TARGET_NAME)";
+			SWIFT_VERSION = 5.0;
+		};
+		name = Debug;
+	};
+	0020A0652B1F6A3700E7A8D0 /* Release */ = {
+		isa = XCBuildConfiguration;
+		buildSettings = {
+			INFOPLIST_FILE = Tests/MoraTests/Info.plist;
+			LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+			PRODUCT_BUNDLE_IDENTIFIER = com.example.moraTests;
+			PRODUCT_NAME = "$(TARGET_NAME)";
+			SWIFT_VERSION = 5.0;
+		};
+		name = Release;
+	};
+	0020A0662B1F6A3700E7A8D0 /* Debug */ = {
+		isa = XCBuildConfiguration;
+		buildSettings = {
+			INFOPLIST_FILE = Tests/MoraSnapshotTests/Info.plist;
+			LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+			PRODUCT_BUNDLE_IDENTIFIER = com.example.moraSnapshotTests;
+			PRODUCT_NAME = "$(TARGET_NAME)";
+			SWIFT_VERSION = 5.0;
+		};
+		name = Debug;
+	};
+	0020A0672B1F6A3700E7A8D0 /* Release */ = {
+		isa = XCBuildConfiguration;
+		buildSettings = {
+			INFOPLIST_FILE = Tests/MoraSnapshotTests/Info.plist;
+			LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+			PRODUCT_BUNDLE_IDENTIFIER = com.example.moraSnapshotTests;
+			PRODUCT_NAME = "$(TARGET_NAME)";
+			SWIFT_VERSION = 5.0;
+		};
+		name = Release;
+	};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+	0020A0502B1F6A3700E7A8D0 /* Build configuration list for PBXNativeTarget "Mora" */ = {
+		isa = XCConfigurationList;
+		buildConfigurations = (
+			0020A0622B1F6A3700E7A8D0 /* Debug */,
+			0020A0632B1F6A3700E7A8D0 /* Release */,
+		);
+		defaultConfigurationIsVisible = 0;
+		defaultConfigurationName = Release;
+	};
+	0020A0512B1F6A3700E7A8D0 /* Build configuration list for PBXNativeTarget "MoraTests" */ = {
+		isa = XCConfigurationList;
+		buildConfigurations = (
+			0020A0642B1F6A3700E7A8D0 /* Debug */,
+			0020A0652B1F6A3700E7A8D0 /* Release */,
+		);
+		defaultConfigurationIsVisible = 0;
+		defaultConfigurationName = Release;
+	};
+	0020A0522B1F6A3700E7A8D0 /* Build configuration list for PBXNativeTarget "MoraSnapshotTests" */ = {
+		isa = XCConfigurationList;
+		buildConfigurations = (
+			0020A0662B1F6A3700E7A8D0 /* Debug */,
+			0020A0672B1F6A3700E7A8D0 /* Release */,
+		);
+		defaultConfigurationIsVisible = 0;
+		defaultConfigurationName = Release;
+	};
+	0020A0532B1F6A3700E7A8D0 /* Build configuration list for PBXProject "Mora" */ = {
+		isa = XCConfigurationList;
+		buildConfigurations = (
+			0020A0602B1F6A3700E7A8D0 /* Debug */,
+			0020A0612B1F6A3700E7A8D0 /* Release */,
+		);
+		defaultConfigurationIsVisible = 0;
+		defaultConfigurationName = Release;
+	};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = 0020A0002B1F6A3700E7A8D0 /* Project object */;
+}
