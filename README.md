@@ -1,53 +1,103 @@
 # Mora
 
-Minimalist macOS menu bar focus timer (25/5/15) with full-screen break overlays and daily progress tracking. Currently **WIP/pre-release**—expect rough edges while core flows and idle handling are still being shaped.
+Minimalist macOS menu bar focus timer for 25/5/15 work cycles, full-screen break overlays, and lightweight daily progress tracking.
 
-## Status
-- Work in progress; not production-ready. Behavior and UI may change.
-- Idle auto-pause has an early implementation; preference UI and return-from-idle polish are still in progress.
-- Not ready for general use; expect breakage and UI/shortcut changes.
+Mora is currently a **preview release**. The core timer, break, sound, progress, and shortcut flows are present, but preferences, idle handling, signing, and UX polish are still being shaped.
 
-## End Goal
-- Minimal, reliable macOS menu bar Pomodoro timer (25/5/15) that stays out of the way, enforces breaks, and keeps focus time honest.
+## Download
 
-## Project Goals
-- Menu bar first: start/pause/resume without window juggling; global shortcuts for every command.
-- Accurate timing: auto-transitions, persistence, and idle auto-pause keep focus tracking aligned with reality.
-- Respectful breaks: full-screen overlays on all displays with gentle countdowns and sounds you can mute.
-- Lightweight state: simple persistence for cycles/today’s blocks so relaunching is predictable.
+Latest release: [Mora 1.0](https://github.com/aliffrhn/mora/releases/tag/v1.0)
 
-## Current Capabilities
-- 25/5/15 Pomodoro-style cadence with automatic phase transitions and chimes (distinct for focus, break, cycle complete).
-- Menu bar UI showing live countdown, phase, and controls (start, pause, resume, restart, skip break, quit).
-- Full-screen break overlay per display with circular countdown and skip/dismiss controls.
-- Progress tracking for “Today’s blocks” and “Moras earned” plus basic sound preference persistence.
-- Global hotkey support via `HotKey` and Combine-driven state propagation.
+- Download: [Mora-1.0.dmg](https://github.com/aliffrhn/mora/releases/download/v1.0/Mora-1.0.dmg)
+- Version: `1.0` (`CFBundleVersion` `1`)
+- macOS: 13+
+- Architecture: universal macOS build (`arm64` + `x86_64`)
+- SHA-256: `331dd3ad72b4c960d30e0c5d5595f9b9d5799b95aebb2ada3872ffaba5f4b008`
 
-## Known Gaps (current WIP)
-- Idle auto-pause is implemented behind stored preferences, but there are no idle threshold controls yet.
-- Preferences are minimal (sound toggle only); no autostart or customization for durations.
-- Limited error handling and edge-case coverage; expect occasional UI roughness.
+Open the DMG and drag `Mora.app` into `/Applications`.
 
-## Roadmap (high-level)
-1) **001-mora-menu-bar-timer** — baseline menu bar timer, overlays, sounds, and cycle tracking (initial implementation present, polish ongoing).
-2) **001-idle-autopause** — detect keyboard/mouse inactivity, auto-pause focus blocks, and prompt on return (design/spec drafted; implementation pending).
-3) **Next candidates** — richer preferences (thresholds, autostart), progress summaries, and UX polish from usability feedback.
+This build is not Developer ID signed or notarized yet. macOS may block the first launch; if you trust this build, allow it from **System Settings > Privacy & Security**.
 
-## Getting Started
-**Requirements:** macOS 13+, Xcode 26+/Swift 6.2+, SwiftPM dependency (`HotKey`).
+## Features
 
-Build/Run (recommended):
-1. `swift package resolve`
-2. `open Mora.xcodeproj` and run the `Mora` scheme (menu bar app).
+- Menu bar first: start, pause, resume, restart, and quit without managing an app window.
+- 25/5/15 Pomodoro-style cadence with automatic phase transitions.
+- Full-screen break overlays on every display with countdown and skip/dismiss controls.
+- Daily progress for today's circles and moras earned.
+- Chimes for focus end, break end, and cycle completion, with a sound toggle.
+- Global shortcuts for the main timer commands.
+- Early idle auto-pause plumbing for keyboard/mouse inactivity, with more controls still pending.
 
-CLI alternative (for quick smoke): `swift run Mora`
+## Keyboard Shortcuts
 
-Tests: `swift test`
-
-## Tech Stack
-- Swift 6.2+, AppKit + SwiftUI menu bar app, Combine for state propagation, HotKey for global shortcuts.
+| Shortcut | Action |
+| --- | --- |
+| `Shift` + `Command` + `S` | Start or resume |
+| `Shift` + `Command` + `P` | Pause |
+| `Shift` + `Command` + `R` | Restart work session |
+| `Shift` + `Command` + `K` | Skip break |
 
 ## Screenshots
-- Current menu bar panel (WIP): shows today's circles/moras, live countdown, Pause/Restart work session, Start short/long break, and Quit.
+
+Current menu bar panel: today's circles/moras, live countdown, timer controls, break actions, and quit.
 
 ![Mora menu panel](docs/menu-panel.png)
+
+## Privacy & Permissions
+
+Mora stores timer state, progress, and preferences locally in macOS `UserDefaults`.
+
+Idle auto-pause uses local keyboard/mouse inactivity signals. Mora does not include analytics, accounts, cloud sync, or telemetry upload.
+
+## Known Limitations
+
+- Not notarized yet, so first launch may require manual approval in macOS security settings.
+- Preferences are minimal; only the sound toggle is currently exposed in the UI.
+- Idle auto-pause has service/state support, but threshold and enable controls still need user-facing UI.
+- Timer durations are fixed at 25/5/15 for now.
+- Error handling and edge-case polish are still WIP.
+
+## Build From Source
+
+Requirements:
+
+- macOS 13+
+- Xcode 26+ / Swift 6.2+
+- SwiftPM dependency resolution for [`HotKey`](https://github.com/soffes/HotKey)
+
+Recommended local run:
+
+1. `swift package resolve`
+2. `open Mora.xcodeproj`
+3. Run the `Mora` scheme from Xcode.
+
+Developer smoke path:
+
+```sh
+swift run Mora
+```
+
+For app-like behavior, prefer Xcode or an installed `.app` bundle over raw `swift run`.
+
+## Tests
+
+```sh
+swift test
+```
+
+The Xcode project also includes the `Mora` and `MoraSnapshotTests` schemes.
+
+## Tech Stack
+
+- Swift 6.2+
+- AppKit + SwiftUI menu bar app
+- Combine for state propagation
+- [`HotKey`](https://github.com/soffes/HotKey) for global shortcuts
+- `UserDefaults` for lightweight local persistence
+
+## Roadmap
+
+1. Polish the `v1.0` preview release path: signing, notarization, and repeatable DMG packaging.
+2. Add richer preferences: idle threshold, idle enable/disable, autostart, and duration customization.
+3. Improve return-from-idle UX and progress correction flows.
+4. Add progress summaries and usability polish from real usage feedback.
