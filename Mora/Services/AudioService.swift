@@ -1,3 +1,4 @@
+import AppKit
 import AVFoundation
 
 protocol AudioServiceType {
@@ -35,23 +36,57 @@ final class AudioService: AudioServiceType {
         if let existing = players[event] {
             return existing
         }
-        guard let url = url(for: event) else {
+        let player: AVAudioPlayer
+        if let dataAsset = NSDataAsset(name: event.assetName, bundle: resourceBundle) {
+            player = try AVAudioPlayer(data: dataAsset.data)
+        } else if let url = url(for: event) {
+            player = try AVAudioPlayer(contentsOf: url)
+        } else {
             throw NSError(domain: "AudioService", code: 0, userInfo: [NSLocalizedDescriptionKey: "Missing audio for \(event)"])
         }
-        let player = try AVAudioPlayer(contentsOf: url)
         player.prepareToPlay()
         players[event] = player
         return player
     }
 
+    private var resourceBundle: Bundle {
+        #if SWIFT_PACKAGE
+        return .module
+        #else
+        return bundle
+        #endif
+    }
+
     private func url(for event: AudioEvent) -> URL? {
-        switch event {
+        resourceBundle.url(forResource: event.fileBaseName, withExtension: "wav")
+            ?? resourceBundle.url(
+                forResource: event.fileBaseName,
+                withExtension: "wav",
+                subdirectory: "Assets.xcassets/\(event.assetName).dataset"
+            )
+    }
+}
+
+private extension AudioEvent {
+    var assetName: String {
+        switch self {
         case .focusEnd:
-            return bundle.url(forResource: "focus_end", withExtension: "wav")
+            return "FocusEnd"
         case .breakEnd:
-            return bundle.url(forResource: "break_end", withExtension: "wav")
+            return "BreakEnd"
         case .cycleComplete:
-            return bundle.url(forResource: "cycle_complete", withExtension: "wav")
+            return "CycleComplete"
+        }
+    }
+
+    var fileBaseName: String {
+        switch self {
+        case .focusEnd:
+            return "focus_end"
+        case .breakEnd:
+            return "break_end"
+        case .cycleComplete:
+            return "cycle_complete"
         }
     }
 }

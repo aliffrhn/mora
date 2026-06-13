@@ -1,6 +1,6 @@
 import Foundation
 
-struct DailyProgress: Codable, Equatable {
+struct DailyProgress: Codable, Equatable, Sendable {
     var date: Date
     var completedBlocks: Int
     var morasEarned: Int
@@ -38,8 +38,8 @@ struct DailyProgress: Codable, Equatable {
     }
 }
 
-struct IdleEvent: Codable, Equatable, Identifiable {
-    enum Decision: String, Codable {
+struct IdleEvent: Codable, Equatable, Identifiable, Sendable {
+    enum Decision: String, Codable, Sendable {
         case resumed
         case stayedPaused
         case skipped
@@ -67,7 +67,7 @@ struct IdleEvent: Codable, Equatable, Identifiable {
     }
 }
 
-struct ActivityMonitorState {
+struct ActivityMonitorState: Sendable {
     var lastInputTimestamp: Date
     var isPromptVisible: Bool
     var autoPausedPhase: TimerPhase?

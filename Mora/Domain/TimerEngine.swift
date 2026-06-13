@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 
-struct TimerTick {
+struct TimerTick: Sendable {
     let remaining: TimeInterval
     let targetDate: Date
     let startedAt: Date

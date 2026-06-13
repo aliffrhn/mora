@@ -5,7 +5,7 @@ protocol SystemEventsServiceType {
     var notifications: AnyPublisher<SystemEvent, Never> { get }
 }
 
-enum SystemEvent {
+enum SystemEvent: Sendable {
     case willSleep
     case didWake
     case screensChanged
@@ -13,25 +13,30 @@ enum SystemEvent {
 
 final class SystemEventsService: NSObject, SystemEventsServiceType {
     private let subject = PassthroughSubject<SystemEvent, Never>()
-    private var observers: [NSObjectProtocol] = []
+    private let workspaceNotificationCenter: NotificationCenter
+    private let appNotificationCenter: NotificationCenter
+    private var workspaceObservers: [NSObjectProtocol] = []
+    private var appObservers: [NSObjectProtocol] = []
     var notifications: AnyPublisher<SystemEvent, Never> { subject.eraseToAnyPublisher() }
 
     override init() {
-        super.init()
-        let notificationCenter = NotificationCenter.default
         let workspace = NSWorkspace.shared
-        observers.append(notificationCenter.addObserver(forName: NSWorkspace.willSleepNotification, object: workspace, queue: .main) { [weak subject] _ in
+        self.workspaceNotificationCenter = workspace.notificationCenter
+        self.appNotificationCenter = .default
+        super.init()
+        workspaceObservers.append(workspaceNotificationCenter.addObserver(forName: NSWorkspace.willSleepNotification, object: workspace, queue: .main) { [weak subject] _ in
             subject?.send(.willSleep)
         })
-        observers.append(notificationCenter.addObserver(forName: NSWorkspace.didWakeNotification, object: workspace, queue: .main) { [weak subject] _ in
+        workspaceObservers.append(workspaceNotificationCenter.addObserver(forName: NSWorkspace.didWakeNotification, object: workspace, queue: .main) { [weak subject] _ in
             subject?.send(.didWake)
         })
-        observers.append(notificationCenter.addObserver(forName: NSApplication.didChangeScreenParametersNotification, object: nil, queue: .main) { [weak subject] _ in
+        appObservers.append(appNotificationCenter.addObserver(forName: NSApplication.didChangeScreenParametersNotification, object: nil, queue: .main) { [weak subject] _ in
             subject?.send(.screensChanged)
         })
     }
 
     deinit {
-        observers.forEach { NotificationCenter.default.removeObserver($0) }
+        workspaceObservers.forEach { workspaceNotificationCenter.removeObserver($0) }
+        appObservers.forEach { appNotificationCenter.removeObserver($0) }
     }
 }

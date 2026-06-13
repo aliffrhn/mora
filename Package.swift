@@ -15,17 +15,19 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/soffes/HotKey.git", from: "0.1.0"),
-        .package(url: "https://github.com/pointfreeco/combine-schedulers.git", from: "1.0.0")
+        .package(url: "https://github.com/soffes/HotKey.git", from: "0.1.0")
     ],
     targets: [
         .executableTarget(
             name: "Mora",
             dependencies: [
-                "HotKey",
-                .product(name: "CombineSchedulers", package: "combine-schedulers")
+                "HotKey"
             ],
             path: "Mora",
+            exclude: [
+                "Info.plist",
+                "Mora.entitlements"
+            ],
             resources: [
                 .process("Resources")
             ]
@@ -33,7 +35,10 @@ let package = Package(
         .testTarget(
             name: "MoraTests",
             dependencies: ["Mora"],
-            path: "Tests/MoraTests"
+            path: "Tests/MoraTests",
+            exclude: [
+                "Info.plist"
+            ]
         )
     ]
 )

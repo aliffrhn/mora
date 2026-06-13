@@ -2,14 +2,15 @@ import AppKit
 import Combine
 
 /// Monitors global user activity and emits idle/active/system events.
-final class IdleActivityMonitor: @unchecked Sendable { // Access is funneled through a serial queue; @unchecked silences Sendable warnings.
-    enum EventKind {
+@MainActor
+final class IdleActivityMonitor {
+    enum EventKind: Sendable {
         case thresholdExceeded(idleDuration: TimeInterval)
         case systemSleep
         case systemWake
     }
 
-    struct Event {
+    struct Event: Sendable {
         let kind: EventKind
         let timestamp: Date
     }
@@ -19,26 +20,18 @@ final class IdleActivityMonitor: @unchecked Sendable { // Access is funneled thr
 
     private var monitors: [Any] = []
     private var workspaceObservers: [NSObjectProtocol] = []
-    private var timer: DispatchSourceTimer?
-    private let timerQueue = DispatchQueue(label: "app.mora.idle-monitor")
+    private var timer: Timer?
     private var lastActivityDate: Date = Date()
     private var isIdleEventPending = false
     private var monitoringActive = false
 
     private var settings: IdleSettings
     private let workspace: NSWorkspace
-    private let notificationCenter: NotificationCenter
 
     init(settings: IdleSettings = .default,
-         workspace: NSWorkspace = .shared,
-         notificationCenter: NotificationCenter = .default) {
+         workspace: NSWorkspace = .shared) {
         self.settings = settings
         self.workspace = workspace
-        self.notificationCenter = notificationCenter
-    }
-
-    deinit {
-        stopMonitoring()
     }
 
     func startMonitoring() {
@@ -54,11 +47,12 @@ final class IdleActivityMonitor: @unchecked Sendable { // Access is funneled thr
     func stopMonitoring() {
         monitors.forEach { NSEvent.removeMonitor($0) }
         monitors.removeAll()
-        workspaceObservers.forEach { notificationCenter.removeObserver($0) }
+        workspaceObservers.forEach { workspace.notificationCenter.removeObserver($0) }
         workspaceObservers.removeAll()
-        timer?.cancel()
+        timer?.invalidate()
         timer = nil
         monitoringActive = false
+        isIdleEventPending = false
     }
 
     func updateSettings(_ newSettings: IdleSettings) {
@@ -73,8 +67,9 @@ final class IdleActivityMonitor: @unchecked Sendable { // Access is funneled thr
     private func installEventMonitors() {
         let mask: NSEvent.EventTypeMask = [.mouseMoved, .leftMouseDown, .rightMouseDown, .otherMouseDown, .keyDown, .scrollWheel]
         if let monitor = NSEvent.addGlobalMonitorForEvents(matching: mask, handler: { [weak self] _ in
-            guard let self else { return }
-            self.timerQueue.async { [weak self] in self?.handleActivity() }
+            Task { @MainActor [weak self] in
+                self?.handleActivity()
+            }
         }) {
             monitors.append(monitor)
         }
@@ -83,10 +78,14 @@ final class IdleActivityMonitor: @unchecked Sendable { // Access is funneled thr
     private func installWorkspaceObservers() {
         let center = workspace.notificationCenter
         let willSleep = center.addObserver(forName: NSWorkspace.willSleepNotification, object: workspace, queue: .main) { [weak self] _ in
-            self?.timerQueue.async { [weak self] in self?.handleSystemSleep() }
+            Task { @MainActor [weak self] in
+                self?.handleSystemSleep()
+            }
         }
         let didWake = center.addObserver(forName: NSWorkspace.didWakeNotification, object: workspace, queue: .main) { [weak self] _ in
-            self?.timerQueue.async { [weak self] in self?.handleSystemWake() }
+            Task { @MainActor [weak self] in
+                self?.handleSystemWake()
+            }
         }
         workspaceObservers.append(contentsOf: [willSleep, didWake])
     }
@@ -98,15 +97,15 @@ final class IdleActivityMonitor: @unchecked Sendable { // Access is funneled thr
     }
 
     private func scheduleIdleTimer() {
-        timer?.cancel()
+        timer?.invalidate()
         timer = nil
         guard settings.enabled else { return }
-        let timer = DispatchSource.makeTimerSource(queue: timerQueue)
-        timer.schedule(deadline: .now() + .seconds(settings.thresholdSeconds))
-        timer.setEventHandler { [weak self] in
-            self?.handleIdleThreshold()
+        let timer = Timer.scheduledTimer(withTimeInterval: TimeInterval(settings.thresholdSeconds), repeats: false) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                self?.handleIdleThreshold()
+            }
         }
-        timer.resume()
+        timer.tolerance = min(TimeInterval(settings.thresholdSeconds) * 0.1, 5)
         self.timer = timer
     }
 
@@ -121,7 +120,7 @@ final class IdleActivityMonitor: @unchecked Sendable { // Access is funneled thr
 
     private func handleSystemSleep() {
         isIdleEventPending = true
-        timer?.cancel()
+        timer?.invalidate()
         timer = nil
         subject.send(Event(kind: .systemSleep, timestamp: Date()))
     }

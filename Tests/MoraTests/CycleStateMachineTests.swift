@@ -11,9 +11,11 @@ final class CycleStateMachineTests: XCTestCase {
         XCTAssertEqual(machine.timerState.phase, .focus(block: 1))
 
         timer.triggerCompletion()
+        drainMainQueue()
         XCTAssertEqual(machine.timerState.phase, .shortBreak(block: 1))
 
         timer.triggerCompletion()
+        drainMainQueue()
         XCTAssertEqual(machine.timerState.phase, .focus(block: 2))
     }
 
@@ -25,9 +27,11 @@ final class CycleStateMachineTests: XCTestCase {
 
         for block in 1...4 {
             timer.triggerCompletion() // focus completed -> short or long break
+            drainMainQueue()
             if block < 4 {
                 XCTAssertEqual(machine.timerState.phase, .shortBreak(block: block))
                 timer.triggerCompletion() // complete short break
+                drainMainQueue()
                 XCTAssertEqual(machine.timerState.phase, .focus(block: block + 1))
             } else {
                 XCTAssertEqual(machine.timerState.phase, .longBreak)
@@ -51,6 +55,10 @@ final class CycleStateMachineTests: XCTestCase {
     // MARK: - Helpers
 
     private let referenceDate = Date(timeIntervalSince1970: 1_700_000_000)
+
+    private func drainMainQueue() {
+        RunLoop.main.run(until: Date().addingTimeInterval(0.01))
+    }
 }
 
 private final class FakeTimerEngine: TimerEngineType {

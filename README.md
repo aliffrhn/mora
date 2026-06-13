@@ -4,7 +4,7 @@ Minimalist macOS menu bar focus timer (25/5/15) with full-screen break overlays 
 
 ## Status
 - Work in progress; not production-ready. Behavior and UI may change.
-- Idle auto-pause is planned but not implemented; expect missing polish and potential bugs.
+- Idle auto-pause has an early implementation; preference UI and return-from-idle polish are still in progress.
 - Not ready for general use; expect breakage and UI/shortcut changes.
 
 ## End Goal
@@ -12,7 +12,7 @@ Minimalist macOS menu bar focus timer (25/5/15) with full-screen break overlays 
 
 ## Project Goals
 - Menu bar first: start/pause/resume without window juggling; global shortcuts for every command.
-- Accurate timing: auto-transitions, persistence, and upcoming idle auto-pause keep focus tracking aligned with reality.
+- Accurate timing: auto-transitions, persistence, and idle auto-pause keep focus tracking aligned with reality.
 - Respectful breaks: full-screen overlays on all displays with gentle countdowns and sounds you can mute.
 - Lightweight state: simple persistence for cycles/today’s blocks so relaunching is predictable.
 
@@ -24,7 +24,7 @@ Minimalist macOS menu bar focus timer (25/5/15) with full-screen break overlays 
 - Global hotkey support via `HotKey` and Combine-driven state propagation.
 
 ## Known Gaps (current WIP)
-- Idle auto-pause not implemented; no idle threshold controls yet.
+- Idle auto-pause is implemented behind stored preferences, but there are no idle threshold controls yet.
 - Preferences are minimal (sound toggle only); no autostart or customization for durations.
 - Limited error handling and edge-case coverage; expect occasional UI roughness.
 
@@ -34,7 +34,7 @@ Minimalist macOS menu bar focus timer (25/5/15) with full-screen break overlays 
 3) **Next candidates** — richer preferences (thresholds, autostart), progress summaries, and UX polish from usability feedback.
 
 ## Getting Started
-**Requirements:** macOS 13+, Xcode 15+/Swift 5.10+, SwiftPM dependencies (`HotKey`, `combine-schedulers`).
+**Requirements:** macOS 13+, Xcode 26+/Swift 6.2+, SwiftPM dependency (`HotKey`).
 
 Build/Run (recommended):
 1. `swift package resolve`
@@ -45,7 +45,7 @@ CLI alternative (for quick smoke): `swift run Mora`
 Tests: `swift test`
 
 ## Tech Stack
-- Swift 5.10, AppKit + SwiftUI menu bar app, Combine for state propagation, HotKey for global shortcuts.
+- Swift 6.2+, AppKit + SwiftUI menu bar app, Combine for state propagation, HotKey for global shortcuts.
 
 ## Screenshots
 - Current menu bar panel (WIP): shows today's circles/moras, live countdown, Pause/Restart work session, Start short/long break, and Quit.

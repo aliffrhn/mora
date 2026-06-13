@@ -1,6 +1,6 @@
 import Foundation
 
-indirect enum TimerPhase: Equatable, Codable {
+indirect enum TimerPhase: Equatable, Codable, Sendable {
     case idle
     case focus(block: Int)
     case shortBreak(block: Int)

@@ -26,15 +26,27 @@
 	0020B0112B1F6A3700E7A8D0 /* BreakOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B1112B1F6A3700E7A8D0 /* BreakOverlayView.swift */; };
 	0020B0122B1F6A3700E7A8D0 /* RingCountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B1122B1F6A3700E7A8D0 /* RingCountdownView.swift */; };
 	0020B0202B1F6A3700E7A8D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0020B11A2B1F6A3700E7A8D0 /* Assets.xcassets */; };
-	0020B0212B1F6A3700E7A8D0 /* focus_end.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0020B11B2B1F6A3700E7A8D0 /* focus_end.wav */; };
-	0020B0222B1F6A3700E7A8D0 /* break_end.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0020B11C2B1F6A3700E7A8D0 /* break_end.wav */; };
-	0020B0232B1F6A3700E7A8D0 /* cycle_complete.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0020B11D2B1F6A3700E7A8D0 /* cycle_complete.wav */; };
 	0020B0302B1F6A3700E7A8D0 /* MoraTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B1202B1F6A3700E7A8D0 /* MoraTests.swift */; };
 	0020B0312B1F6A3700E7A8D0 /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B1242B1F6A3700E7A8D0 /* Placeholder.swift */; };
 	0020B0322B1F6A3700E7A8D0 /* HotKeyCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B1252B1F6A3700E7A8D0 /* HotKeyCenter.swift */; };
 	0020B0332B1F6A3700E7A8D0 /* BreakOverlayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B1262B1F6A3700E7A8D0 /* BreakOverlayModel.swift */; };
 	0020B0342B1F6A3700E7A8D0 /* VisualEffectBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B1272B1F6A3700E7A8D0 /* VisualEffectBlur.swift */; };
+	0020B0352B1F6A3700E7A8D0 /* IdleActivityMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B1282B1F6A3700E7A8D0 /* IdleActivityMonitor.swift */; };
+	0020B0362B1F6A3700E7A8D0 /* IdleSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B1292B1F6A3700E7A8D0 /* IdleSettings.swift */; };
+	0020B0372B1F6A3700E7A8D0 /* CycleStateMachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B12A2B1F6A3700E7A8D0 /* CycleStateMachineTests.swift */; };
+	0020B0382B1F6A3700E7A8D0 /* ProgressTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020B12B2B1F6A3700E7A8D0 /* ProgressTrackerTests.swift */; };
+	0020B2002B1F6A3700E7A8D0 /* HotKey in Frameworks */ = {isa = PBXBuildFile; productRef = 0020B2022B1F6A3700E7A8D0 /* HotKey */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0020B2102B1F6A3700E7A8D0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0020A0002B1F6A3700E7A8D0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0020A0012B1F6A3700E7A8D0;
+			remoteInfo = Mora;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 	0020B1012B1F6A3700E7A8D0 /* MoraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoraApp.swift; sourceTree = "<group>"; };
@@ -58,9 +70,6 @@
 	0020B1132B1F6A3700E7A8D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 	0020B1142B1F6A3700E7A8D0 /* Mora.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Mora.entitlements; sourceTree = "<group>"; };
 	0020B11A2B1F6A3700E7A8D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-	0020B11B2B1F6A3700E7A8D0 /* focus_end.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = focus_end.wav; sourceTree = "<group>"; };
-	0020B11C2B1F6A3700E7A8D0 /* break_end.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = break_end.wav; sourceTree = "<group>"; };
-	0020B11D2B1F6A3700E7A8D0 /* cycle_complete.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cycle_complete.wav; sourceTree = "<group>"; };
 	0020B11E2B1F6A3700E7A8D0 /* Mora.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mora.app; sourceTree = BUILT_PRODUCTS_DIR; };
 	0020B11F2B1F6A3700E7A8D0 /* MoraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 	0020B1202B1F6A3700E7A8D0 /* MoraTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoraTests.swift; sourceTree = "<group>"; };
@@ -71,6 +80,10 @@
 	0020B1252B1F6A3700E7A8D0 /* HotKeyCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeyCenter.swift; sourceTree = "<group>"; };
 	0020B1262B1F6A3700E7A8D0 /* BreakOverlayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakOverlayModel.swift; sourceTree = "<group>"; };
 	0020B1272B1F6A3700E7A8D0 /* VisualEffectBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectBlur.swift; sourceTree = "<group>"; };
+	0020B1282B1F6A3700E7A8D0 /* IdleActivityMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleActivityMonitor.swift; sourceTree = "<group>"; };
+	0020B1292B1F6A3700E7A8D0 /* IdleSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleSettings.swift; sourceTree = "<group>"; };
+	0020B12A2B1F6A3700E7A8D0 /* CycleStateMachineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleStateMachineTests.swift; sourceTree = "<group>"; };
+	0020B12B2B1F6A3700E7A8D0 /* ProgressTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressTrackerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +91,7 @@
 		isa = PBXFrameworksBuildPhase;
 		buildActionMask = 2147483647;
 		files = (
+			0020B2002B1F6A3700E7A8D0 /* HotKey in Frameworks */,
 		);
 		runOnlyForDeploymentPostprocessing = 0;
 	};
@@ -131,6 +145,7 @@
 			0020B1042B1F6A3700E7A8D0 /* MenuBarController.swift */,
 			0020B1052B1F6A3700E7A8D0 /* OverlayController.swift */,
 			0020B1252B1F6A3700E7A8D0 /* HotKeyCenter.swift */,
+			0020B1282B1F6A3700E7A8D0 /* IdleActivityMonitor.swift */,
 			0020B1262B1F6A3700E7A8D0 /* BreakOverlayModel.swift */,
 		);
 		path = Application;
@@ -154,6 +169,7 @@
 			0020B10B2B1F6A3700E7A8D0 /* AudioService.swift */,
 			0020B10C2B1F6A3700E7A8D0 /* PersistenceService.swift */,
 			0020B10D2B1F6A3700E7A8D0 /* SystemEventsService.swift */,
+			0020B1292B1F6A3700E7A8D0 /* IdleSettings.swift */,
 		);
 		path = Services;
 		sourceTree = "<group>";
@@ -182,19 +198,8 @@
 		isa = PBXGroup;
 		children = (
 			0020B11A2B1F6A3700E7A8D0 /* Assets.xcassets */,
-			0020A0272B1F6A3700E7A8D0 /* Sounds */,
 		);
 		path = Resources;
-		sourceTree = "<group>";
-	};
-	0020A0272B1F6A3700E7A8D0 /* Sounds */ = {
-		isa = PBXGroup;
-		children = (
-			0020B11B2B1F6A3700E7A8D0 /* focus_end.wav */,
-			0020B11C2B1F6A3700E7A8D0 /* break_end.wav */,
-			0020B11D2B1F6A3700E7A8D0 /* cycle_complete.wav */,
-		);
-		path = Sounds;
 		sourceTree = "<group>";
 	};
 	0020A0302B1F6A3700E7A8D0 /* Tests */ = {
@@ -210,6 +215,8 @@
 		isa = PBXGroup;
 		children = (
 			0020B1202B1F6A3700E7A8D0 /* MoraTests.swift */,
+			0020B12A2B1F6A3700E7A8D0 /* CycleStateMachineTests.swift */,
+			0020B12B2B1F6A3700E7A8D0 /* ProgressTrackerTests.swift */,
 			0020B1212B1F6A3700E7A8D0 /* Info.plist */,
 		);
 		path = MoraTests;
@@ -250,6 +257,9 @@
 		dependencies = (
 		);
 		name = Mora;
+		packageProductDependencies = (
+			0020B2022B1F6A3700E7A8D0 /* HotKey */,
+		);
 		productName = Mora;
 		productReference = 0020B11E2B1F6A3700E7A8D0 /* Mora.app */;
 		productType = "com.apple.product-type.application";
@@ -264,6 +274,7 @@
 		buildRules = (
 		);
 		dependencies = (
+			0020B2112B1F6A3700E7A8D0 /* PBXTargetDependency */,
 		);
 		name = MoraTests;
 		productName = MoraTests;
@@ -309,6 +320,9 @@
 			en,
 		);
 		mainGroup = 0020A0022B1F6A3700E7A8D0;
+		packageReferences = (
+			0020B2012B1F6A3700E7A8D0 /* XCRemoteSwiftPackageReference "HotKey" */,
+		);
 		productRefGroup = 0020A0402B1F6A3700E7A8D0 /* Products */;
 		projectDirPath = "";
 		projectRoot = "";
@@ -326,9 +340,6 @@
 		buildActionMask = 2147483647;
 		files = (
 			0020B0202B1F6A3700E7A8D0 /* Assets.xcassets in Resources */,
-			0020B0212B1F6A3700E7A8D0 /* focus_end.wav in Resources */,
-			0020B0222B1F6A3700E7A8D0 /* break_end.wav in Resources */,
-			0020B0232B1F6A3700E7A8D0 /* cycle_complete.wav in Resources */,
 		);
 		runOnlyForDeploymentPostprocessing = 0;
 	};
@@ -355,8 +366,10 @@
 			0020B0052B1F6A3700E7A8D0 /* OverlayController.swift in Sources */,
 			0020B0042B1F6A3700E7A8D0 /* MenuBarController.swift in Sources */,
 			0020B0322B1F6A3700E7A8D0 /* HotKeyCenter.swift in Sources */,
+			0020B0352B1F6A3700E7A8D0 /* IdleActivityMonitor.swift in Sources */,
 			0020B0332B1F6A3700E7A8D0 /* BreakOverlayModel.swift in Sources */,
 			0020B0342B1F6A3700E7A8D0 /* VisualEffectBlur.swift in Sources */,
+			0020B0362B1F6A3700E7A8D0 /* IdleSettings.swift in Sources */,
 			0020B0032B1F6A3700E7A8D0 /* AppDelegate.swift in Sources */,
 			0020B0022B1F6A3700E7A8D0 /* AppModel.swift in Sources */,
 			0020B0012B1F6A3700E7A8D0 /* MoraApp.swift in Sources */,
@@ -368,6 +381,8 @@
 		buildActionMask = 2147483647;
 		files = (
 			0020B0302B1F6A3700E7A8D0 /* MoraTests.swift in Sources */,
+			0020B0372B1F6A3700E7A8D0 /* CycleStateMachineTests.swift in Sources */,
+			0020B0382B1F6A3700E7A8D0 /* ProgressTrackerTests.swift in Sources */,
 		);
 		runOnlyForDeploymentPostprocessing = 0;
 	};
@@ -380,6 +395,14 @@
 		runOnlyForDeploymentPostprocessing = 0;
 	};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+	0020B2112B1F6A3700E7A8D0 /* PBXTargetDependency */ = {
+		isa = PBXTargetDependency;
+		target = 0020A0012B1F6A3700E7A8D0 /* Mora */;
+		targetProxy = 0020B2102B1F6A3700E7A8D0 /* PBXContainerItemProxy */;
+	};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 	0020A0602B1F6A3700E7A8D0 /* Debug */ = {
@@ -498,7 +521,7 @@
 			PRODUCT_NAME = "$(TARGET_NAME)";
 			SDKROOT = macosx;
 			SWIFT_EMIT_LOC_STRINGS = YES;
-			SWIFT_VERSION = 5.0;
+			SWIFT_VERSION = 6.0;
 			TARGETED_DEVICE_FAMILY = "1,2";
 		};
 		name = Debug;
@@ -516,7 +539,7 @@
 			PRODUCT_NAME = "$(TARGET_NAME)";
 			SDKROOT = macosx;
 			SWIFT_EMIT_LOC_STRINGS = YES;
-			SWIFT_VERSION = 5.0;
+			SWIFT_VERSION = 6.0;
 			TARGETED_DEVICE_FAMILY = "1,2";
 		};
 		name = Release;
@@ -524,22 +547,26 @@
 	0020A0642B1F6A3700E7A8D0 /* Debug */ = {
 		isa = XCBuildConfiguration;
 		buildSettings = {
+			BUNDLE_LOADER = "$(TEST_HOST)";
 			INFOPLIST_FILE = Tests/MoraTests/Info.plist;
 			LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 			PRODUCT_BUNDLE_IDENTIFIER = com.example.moraTests;
 			PRODUCT_NAME = "$(TARGET_NAME)";
-			SWIFT_VERSION = 5.0;
+			SWIFT_VERSION = 6.0;
+			TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mora.app/Contents/MacOS/Mora";
 		};
 		name = Debug;
 	};
 	0020A0652B1F6A3700E7A8D0 /* Release */ = {
 		isa = XCBuildConfiguration;
 		buildSettings = {
+			BUNDLE_LOADER = "$(TEST_HOST)";
 			INFOPLIST_FILE = Tests/MoraTests/Info.plist;
 			LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 			PRODUCT_BUNDLE_IDENTIFIER = com.example.moraTests;
 			PRODUCT_NAME = "$(TARGET_NAME)";
-			SWIFT_VERSION = 5.0;
+			SWIFT_VERSION = 6.0;
+			TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mora.app/Contents/MacOS/Mora";
 		};
 		name = Release;
 	};
@@ -550,7 +577,7 @@
 			LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 			PRODUCT_BUNDLE_IDENTIFIER = com.example.moraSnapshotTests;
 			PRODUCT_NAME = "$(TARGET_NAME)";
-			SWIFT_VERSION = 5.0;
+			SWIFT_VERSION = 6.0;
 		};
 		name = Debug;
 	};
@@ -561,7 +588,7 @@
 			LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 			PRODUCT_BUNDLE_IDENTIFIER = com.example.moraSnapshotTests;
 			PRODUCT_NAME = "$(TARGET_NAME)";
-			SWIFT_VERSION = 5.0;
+			SWIFT_VERSION = 6.0;
 		};
 		name = Release;
 	};
@@ -605,6 +632,25 @@
 		defaultConfigurationName = Release;
 	};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+	0020B2012B1F6A3700E7A8D0 /* XCRemoteSwiftPackageReference "HotKey" */ = {
+		isa = XCRemoteSwiftPackageReference;
+		repositoryURL = "https://github.com/soffes/HotKey.git";
+		requirement = {
+			kind = upToNextMajorVersion;
+			minimumVersion = 0.1.0;
+		};
+	};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+	0020B2022B1F6A3700E7A8D0 /* HotKey */ = {
+		isa = XCSwiftPackageProductDependency;
+		package = 0020B2012B1F6A3700E7A8D0 /* XCRemoteSwiftPackageReference "HotKey" */;
+		productName = HotKey;
+	};
+/* End XCSwiftPackageProductDependency section */
 
 	};
 	rootObject = 0020A0002B1F6A3700E7A8D0 /* Project object */;

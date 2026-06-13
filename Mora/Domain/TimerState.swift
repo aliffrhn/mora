@@ -1,6 +1,6 @@
 import Foundation
 
-struct TimerState: Equatable, Codable {
+struct TimerState: Equatable, Codable, Sendable {
     var phase: TimerPhase
     var remaining: TimeInterval
     var targetDate: Date

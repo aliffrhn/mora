@@ -1,6 +1,6 @@
 import Foundation
 
-struct IdleSettings: Codable, Equatable {
+struct IdleSettings: Codable, Equatable, Sendable {
     var enabled: Bool
     var thresholdSeconds: Int
 
