@@ -4,6 +4,7 @@
 # Xcode/SwiftPM build products
 DerivedData/
 .build/
+dist/
 Packages/
 *.swiftpm/
 xcuserdata/

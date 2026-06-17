@@ -6,13 +6,13 @@ Mora is currently a **preview release**. The core timer, break, sound, progress,
 
 ## Download
 
-Latest release: [Mora 1.0](https://github.com/aliffrhn/mora/releases/tag/v1.0)
+Latest release: [Mora 1.1](https://github.com/aliffrhn/mora/releases/tag/v1.1)
 
-- Download: [Mora-1.0.dmg](https://github.com/aliffrhn/mora/releases/download/v1.0/Mora-1.0.dmg)
-- Version: `1.0` (`CFBundleVersion` `1`)
+- Download: [Mora-1.1.dmg](https://github.com/aliffrhn/mora/releases/download/v1.1/Mora-1.1.dmg)
+- Version: `1.1` (`CFBundleVersion` `2`)
 - macOS: 13+
 - Architecture: universal macOS build (`arm64` + `x86_64`)
-- SHA-256: `331dd3ad72b4c960d30e0c5d5595f9b9d5799b95aebb2ada3872ffaba5f4b008`
+- SHA-256: `a7e1dae7284c33500a6e29b5ba6511ec6f197d4ff5b19c29f6e7b6f28bdab8d1`
 
 Open the DMG and drag `Mora.app` into `/Applications`.
 
@@ -74,10 +74,10 @@ Recommended local run:
 Developer smoke path:
 
 ```sh
-swift run Mora
+./script/build_and_run.sh
 ```
 
-For app-like behavior, prefer Xcode or an installed `.app` bundle over raw `swift run`.
+For app-like behavior, prefer Xcode, `./script/build_and_run.sh`, or an installed `.app` bundle over raw `swift run`.
 
 ## Tests
 
