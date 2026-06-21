@@ -110,9 +110,96 @@ final class CycleStateMachineTests: XCTestCase {
         XCTAssertEqual(machine.timerState.phase, .shortBreak(block: 1))
     }
 
+    func testCustomDurationsAreUsedForEachPhase() {
+        let timer = FakeTimerEngine()
+        let machine = CycleStateMachine(
+            timerEngine: timer,
+            configuration: customConfiguration,
+            now: referenceDate
+        )
+
+        machine.startInitialFocus(now: referenceDate)
+        XCTAssertEqual(timer.lastDuration, 30 * 60)
+
+        timer.triggerCompletion()
+        drainMainQueue()
+        XCTAssertEqual(timer.lastDuration, 2 * 60)
+
+        machine.startManualLongBreak(now: referenceDate)
+        XCTAssertEqual(timer.lastDuration, 20 * 60)
+    }
+
+    func testConfigurationChangeDoesNotAlterRunningPhaseAndRestartUsesLatestDuration() {
+        let timer = FakeTimerEngine()
+        let machine = CycleStateMachine(timerEngine: timer, now: referenceDate)
+
+        machine.startInitialFocus(now: referenceDate)
+        machine.updateConfiguration(customConfiguration, now: referenceDate.addingTimeInterval(30))
+
+        XCTAssertEqual(machine.timerState.remaining, 25 * 60)
+        XCTAssertEqual(timer.lastDuration, 25 * 60)
+
+        machine.restartPhase(now: referenceDate.addingTimeInterval(60))
+
+        XCTAssertEqual(machine.timerState.remaining, 30 * 60)
+        XCTAssertEqual(timer.lastDuration, 30 * 60)
+    }
+
+    func testConfigurationChangeAppliesAtNextAutomaticTransition() {
+        let timer = FakeTimerEngine()
+        let machine = CycleStateMachine(timerEngine: timer, now: referenceDate)
+
+        machine.startInitialFocus(now: referenceDate)
+        machine.updateConfiguration(customConfiguration)
+        timer.triggerCompletion()
+        drainMainQueue()
+
+        XCTAssertEqual(machine.timerState.phase, .shortBreak(block: 1))
+        XCTAssertEqual(timer.lastDuration, 2 * 60)
+    }
+
+    func testConfigurationChangeUpdatesIdleFocusPreview() {
+        let timer = FakeTimerEngine()
+        let machine = CycleStateMachine(timerEngine: timer, now: referenceDate)
+        let changedAt = referenceDate.addingTimeInterval(30)
+
+        machine.updateConfiguration(customConfiguration, now: changedAt)
+
+        XCTAssertEqual(machine.timerState.phase, .idle)
+        XCTAssertEqual(machine.timerState.remaining, 30 * 60)
+        XCTAssertEqual(machine.timerState.targetDate, changedAt)
+        XCTAssertNil(timer.lastDuration)
+    }
+
+    func testConfigurationChangeDoesNotAlterRestoredRunningPhase() {
+        let timer = FakeTimerEngine()
+        let restored = TimerState(
+            phase: .focus(block: 2),
+            remaining: 10 * 60,
+            targetDate: referenceDate.addingTimeInterval(10 * 60),
+            startedAt: referenceDate.addingTimeInterval(-15 * 60)
+        )
+        let machine = CycleStateMachine(
+            timerEngine: timer,
+            restoredState: restored,
+            now: referenceDate
+        )
+
+        machine.updateConfiguration(customConfiguration)
+
+        XCTAssertEqual(machine.timerState.phase, .focus(block: 2))
+        XCTAssertEqual(machine.timerState.remaining, 10 * 60)
+        XCTAssertEqual(timer.lastDuration, 10 * 60)
+    }
+
     // MARK: - Helpers
 
     private let referenceDate = Date(timeIntervalSince1970: 1_700_000_000)
+    private let customConfiguration = CycleStateMachine.Configuration(
+        focusDuration: 30 * 60,
+        shortBreakDuration: 2 * 60,
+        longBreakDuration: 20 * 60
+    )
 
     private func drainMainQueue() {
         RunLoop.main.run(until: Date().addingTimeInterval(0.01))

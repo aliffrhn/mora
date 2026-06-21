@@ -44,7 +44,12 @@ final class MenuBarController {
         }
 
         let persistedState = persistence.loadTimerState()
-        self.cycleMachine = CycleStateMachine(timerEngine: timerEngine, restoredState: persistedState, now: now)
+        self.cycleMachine = CycleStateMachine(
+            timerEngine: timerEngine,
+            configuration: Self.configuration(from: preferenceStore.currentTimerDurationSettings),
+            restoredState: persistedState,
+            now: now
+        )
         viewModel.controller = self
         viewModel.apply(progress: progressTracker.progress)
         if preferenceStore.currentIdleSettings.enabled {
@@ -137,6 +142,22 @@ final class MenuBarController {
                 self?.idleMonitor.updateSettings(settings)
             }
             .store(in: &cancellables)
+
+        Publishers.CombineLatest3(
+            preferenceStore.$focusDurationMinutes,
+            preferenceStore.$shortBreakDurationMinutes,
+            preferenceStore.$longBreakDurationMinutes
+        )
+        .receive(on: DispatchQueue.main)
+        .sink { [weak self] focusMinutes, shortBreakMinutes, longBreakMinutes in
+            let settings = TimerDurationSettings(
+                focusMinutes: focusMinutes,
+                shortBreakMinutes: shortBreakMinutes,
+                longBreakMinutes: longBreakMinutes
+            )
+            self?.cycleMachine.updateConfiguration(Self.configuration(from: settings))
+        }
+        .store(in: &cancellables)
 
         idleMonitor.events
             .receive(on: DispatchQueue.main)
@@ -288,6 +309,14 @@ final class MenuBarController {
 
     private func clearPendingIdleEvent() {
         pendingIdleEventID = nil
+    }
+
+    private static func configuration(from settings: TimerDurationSettings) -> CycleStateMachine.Configuration {
+        CycleStateMachine.Configuration(
+            focusDuration: TimeInterval(settings.focusMinutes * 60),
+            shortBreakDuration: TimeInterval(settings.shortBreakMinutes * 60),
+            longBreakDuration: TimeInterval(settings.longBreakMinutes * 60)
+        )
     }
 
 }
