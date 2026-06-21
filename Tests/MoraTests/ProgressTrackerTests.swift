@@ -2,6 +2,29 @@ import XCTest
 @testable import Mora
 
 final class ProgressTrackerTests: XCTestCase {
+    func testTracksCurrentMoraProgress() async {
+        let calendar = Calendar(identifier: .gregorian)
+        let startDate = calendar.date(from: DateComponents(year: 2025, month: 11, day: 16, hour: 9))!
+        let tracker = await MainActor.run {
+            ProgressTracker(progress: nil, calendar: calendar, referenceDate: startDate)
+        }
+
+        await MainActor.run {
+            tracker.recordFocusCompletion(blockIndex: 1, date: startDate)
+            tracker.recordFocusCompletion(blockIndex: 2, date: startDate)
+        }
+
+        var snapshot = await MainActor.run { tracker.progress }
+        XCTAssertEqual(snapshot.currentCycleCount, 2)
+
+        await MainActor.run {
+            tracker.recordFocusCompletion(blockIndex: 8, date: startDate)
+        }
+
+        snapshot = await MainActor.run { tracker.progress }
+        XCTAssertEqual(snapshot.currentCycleCount, 4)
+    }
+
     func testRecordsFocusBlocksAndMoras() async {
         let calendar = Calendar(identifier: .gregorian)
         let startDate = calendar.date(from: DateComponents(year: 2025, month: 11, day: 16, hour: 9))!
@@ -32,6 +55,28 @@ final class ProgressTrackerTests: XCTestCase {
 
         snapshot = await MainActor.run { tracker.progress }
         XCTAssertEqual(snapshot.morasEarned, 1)
+        XCTAssertEqual(snapshot.currentCycleCount, 0)
+    }
+
+    func testDoesNotBankMoraBeforeFourCircles() async {
+        let calendar = Calendar(identifier: .gregorian)
+        let startDate = calendar.date(from: DateComponents(year: 2025, month: 11, day: 16, hour: 9))!
+        let tracker = await MainActor.run {
+            ProgressTracker(progress: nil, calendar: calendar, referenceDate: startDate)
+        }
+
+        await MainActor.run {
+            tracker.recordFocusCompletion(blockIndex: 1, date: startDate)
+            tracker.recordFocusCompletion(blockIndex: 2, date: startDate)
+        }
+
+        let earned = await MainActor.run {
+            tracker.recordLongBreakCompletion(date: startDate)
+        }
+
+        let snapshot = await MainActor.run { tracker.progress }
+        XCTAssertFalse(earned)
+        XCTAssertEqual(snapshot.morasEarned, 0)
         XCTAssertEqual(snapshot.currentCycleCount, 0)
     }
 

@@ -6,13 +6,13 @@ Mora is currently a **preview release**. The core timer, break, sound, progress,
 
 ## Download
 
-Latest release: [Mora 1.1](https://github.com/aliffrhn/mora/releases/tag/v1.1)
+Latest release: [Mora 1.2](https://github.com/aliffrhn/mora/releases/tag/v1.2)
 
-- Download: [Mora-1.1.dmg](https://github.com/aliffrhn/mora/releases/download/v1.1/Mora-1.1.dmg)
-- Version: `1.1` (`CFBundleVersion` `2`)
+- Download: [Mora-1.2.dmg](https://github.com/aliffrhn/mora/releases/download/v1.2/Mora-1.2.dmg)
+- Version: `1.2` (`CFBundleVersion` `3`)
 - macOS: 13+
 - Architecture: universal macOS build (`arm64` + `x86_64`)
-- SHA-256: `a7e1dae7284c33500a6e29b5ba6511ec6f197d4ff5b19c29f6e7b6f28bdab8d1`
+- SHA-256: `91e165c0623a0c48ef8b9c06376543ba012ee4c9c469ed68607adc7582c1b89d`
 
 Open the DMG and drag `Mora.app` into `/Applications`.
 
@@ -23,7 +23,7 @@ This build is not Developer ID signed or notarized yet. macOS may block the firs
 - Menu bar first: start, pause, resume, restart, and quit without managing an app window.
 - 25/5/15 Pomodoro-style cadence with automatic phase transitions.
 - Full-screen break overlays on every display with countdown and skip/dismiss controls.
-- Daily progress for today's circles and moras earned.
+- Daily progress for today's circles, four-step mora progress, and banked moras.
 - Chimes for focus end, break end, and cycle completion, with a sound toggle.
 - Global shortcuts for the main timer commands.
 - Early idle auto-pause plumbing for keyboard/mouse inactivity, with more controls still pending.

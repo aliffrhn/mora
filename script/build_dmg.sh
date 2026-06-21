@@ -27,6 +27,13 @@ mkdir -p "$STAGING_DIR"
   build
 
 /usr/bin/ditto "$APP_BUNDLE" "$STAGING_DIR/$APP_NAME.app"
+/usr/bin/codesign \
+  --force \
+  --deep \
+  --sign - \
+  --timestamp=none \
+  "$STAGING_DIR/$APP_NAME.app"
+/usr/bin/codesign --verify --deep --strict --verbose=2 "$STAGING_DIR/$APP_NAME.app"
 /bin/ln -s /Applications "$STAGING_DIR/Applications"
 
 /usr/bin/hdiutil create \

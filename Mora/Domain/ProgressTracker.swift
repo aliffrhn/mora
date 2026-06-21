@@ -82,6 +82,7 @@ final class ProgressTracker: ObservableObject {
         self.calendar = calendar
         if var stored = progress {
             stored.date = calendar.startOfDay(for: stored.date)
+            stored.currentCycleCount = Self.clampedCycleCount(stored.currentCycleCount)
             self.progress = stored
         } else {
             self.progress = DailyProgress(
@@ -98,7 +99,7 @@ final class ProgressTracker: ObservableObject {
     func recordFocusCompletion(blockIndex: Int, date: Date = Date()) {
         normalizeDateIfNeeded(date)
         progress.completedBlocks += 1
-        progress.currentCycleCount = blockIndex
+        progress.currentCycleCount = Self.clampedCycleCount(blockIndex)
     }
 
     @discardableResult
@@ -139,5 +140,9 @@ final class ProgressTracker: ObservableObject {
             currentCycleCount: 0,
             idleEvents: []
         )
+    }
+
+    private static func clampedCycleCount(_ count: Int) -> Int {
+        min(max(count, 0), 4)
     }
 }
