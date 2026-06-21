@@ -1,18 +1,18 @@
 # Mora
 
-Minimalist macOS menu bar focus timer for 25/5/15 work cycles, full-screen break overlays, and lightweight daily progress tracking.
+Minimalist macOS menu bar focus timer with configurable Pomodoro cycles, full-screen break overlays, and lightweight daily progress tracking.
 
 Mora is currently a **preview release**. The core timer, break, sound, progress, and shortcut flows are present, but preferences, idle handling, signing, and UX polish are still being shaped.
 
 ## Download
 
-Latest release: [Mora 1.2](https://github.com/aliffrhn/mora/releases/tag/v1.2)
+Latest release: [Mora 1.3](https://github.com/aliffrhn/mora/releases/tag/v1.3)
 
-- Download: [Mora-1.2.dmg](https://github.com/aliffrhn/mora/releases/download/v1.2/Mora-1.2.dmg)
-- Version: `1.2` (`CFBundleVersion` `3`)
+- Download: [Mora-1.3.dmg](https://github.com/aliffrhn/mora/releases/download/v1.3/Mora-1.3.dmg)
+- Version: `1.3` (`CFBundleVersion` `4`)
 - macOS: 13+
 - Architecture: universal macOS build (`arm64` + `x86_64`)
-- SHA-256: `91e165c0623a0c48ef8b9c06376543ba012ee4c9c469ed68607adc7582c1b89d`
+- SHA-256: `f12d84c3c7de884a4e8812a4c1b66891b2123eaa3cfd60b4020344f5263377cc`
 
 Open the DMG and drag `Mora.app` into `/Applications`.
 
@@ -21,7 +21,7 @@ This build is not Developer ID signed or notarized yet. macOS may block the firs
 ## Features
 
 - Menu bar first: start, pause, resume, restart, and quit without managing an app window.
-- 25/5/15 Pomodoro-style cadence with automatic phase transitions.
+- Configurable focus, short-break, and long-break durations with 25/5/15 defaults.
 - Full-screen break overlays on every display with countdown and skip/dismiss controls.
 - Daily progress for today's circles, four-step mora progress, and banked moras.
 - Chimes for focus end, break end, and cycle completion, with a sound toggle.
@@ -52,9 +52,8 @@ Idle auto-pause uses local keyboard/mouse inactivity signals. Mora does not incl
 ## Known Limitations
 
 - Not notarized yet, so first launch may require manual approval in macOS security settings.
-- Preferences are minimal; only the sound toggle is currently exposed in the UI.
+- Preferences currently cover sound and timer durations; idle controls are not yet exposed in the UI.
 - Idle auto-pause has service/state support, but threshold and enable controls still need user-facing UI.
-- Timer durations are fixed at 25/5/15 for now.
 - Error handling and edge-case polish are still WIP.
 
 ## Build From Source
@@ -98,6 +97,6 @@ The Xcode project also includes the `Mora` and `MoraSnapshotTests` schemes.
 ## Roadmap
 
 1. Polish the `v1.0` preview release path: signing, notarization, and repeatable DMG packaging.
-2. Add richer preferences: idle threshold, idle enable/disable, autostart, and duration customization.
+2. Add richer preferences: idle threshold, idle enable/disable, and autostart.
 3. Improve return-from-idle UX and progress correction flows.
 4. Add progress summaries and usability polish from real usage feedback.
