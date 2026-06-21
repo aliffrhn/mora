@@ -2,7 +2,7 @@ import Foundation
 import Combine
 
 final class CycleStateMachine: ObservableObject {
-    struct Configuration {
+    struct Configuration: Equatable {
         let focusDuration: TimeInterval
         let shortBreakDuration: TimeInterval
         let longBreakDuration: TimeInterval
@@ -14,7 +14,7 @@ final class CycleStateMachine: ObservableObject {
     @Published private(set) var isPaused: Bool = false
 
     private let timerEngine: TimerEngineType
-    private let config: Configuration
+    private var config: Configuration
     private var cancellables: Set<AnyCancellable> = []
     private var activePhase: TimerPhase = .idle
     private var pausedContext: (phase: TimerPhase, remaining: TimeInterval)?
@@ -44,6 +44,18 @@ final class CycleStateMachine: ObservableObject {
     func startInitialFocus(now: Date = Date()) {
         guard case .idle = activePhase else { return }
         beginFocus(block: 1, now: now)
+    }
+
+    func updateConfiguration(_ configuration: Configuration, now: Date = Date()) {
+        guard configuration != config else { return }
+        config = configuration
+        guard case .idle = activePhase else { return }
+        timerState = TimerState(
+            phase: .idle,
+            remaining: configuration.focusDuration,
+            targetDate: now,
+            startedAt: now
+        )
     }
 
     func pause(now: Date = Date()) {

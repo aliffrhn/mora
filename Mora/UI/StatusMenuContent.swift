@@ -16,7 +16,7 @@ struct StatusMenuContent: View {
             }
             .labelStyle(.titleAndIcon)
             Divider()
-            quitSection
+            appSection
         }
         .padding(12)
         .frame(width: 240)
@@ -91,11 +91,40 @@ struct StatusMenuContent: View {
     }
 
     @ViewBuilder
-    private var quitSection: some View {
+    private var appSection: some View {
+        settingsControl
         Button(role: .destructive) {
             NSApplication.shared.terminate(nil)
         } label: {
             Label("Quit Mora", systemImage: "power")
+        }
+    }
+
+    @ViewBuilder
+    private var settingsControl: some View {
+        if #available(macOS 14.0, *) {
+            OpenSettingsButton()
+        } else {
+            Button {
+                NSApplication.shared.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
+                NSApplication.shared.activate(ignoringOtherApps: true)
+            } label: {
+                Label("Settings...", systemImage: "gearshape")
+            }
+        }
+    }
+}
+
+@available(macOS 14.0, *)
+private struct OpenSettingsButton: View {
+    @Environment(\.openSettings) private var openSettings
+
+    var body: some View {
+        Button {
+            NSApplication.shared.activate(ignoringOtherApps: true)
+            openSettings()
+        } label: {
+            Label("Settings...", systemImage: "gearshape")
         }
     }
 }
@@ -144,9 +173,57 @@ struct SettingsView: View {
 
     var body: some View {
         Form {
-            Toggle("Play sounds", isOn: $preferences.soundEnabled)
+            Section("Timer") {
+                durationStepper(
+                    title: "Focus",
+                    value: $preferences.focusDurationMinutes,
+                    range: TimerDurationSettings.focusRange,
+                    step: TimerDurationSettings.focusStep
+                )
+                durationStepper(
+                    title: "Short break",
+                    value: $preferences.shortBreakDurationMinutes,
+                    range: TimerDurationSettings.shortBreakRange,
+                    step: TimerDurationSettings.shortBreakStep
+                )
+                durationStepper(
+                    title: "Long break",
+                    value: $preferences.longBreakDurationMinutes,
+                    range: TimerDurationSettings.longBreakRange,
+                    step: TimerDurationSettings.longBreakStep
+                )
+
+                Button(action: preferences.restoreTimerDurationDefaults) {
+                    Label("Restore Defaults", systemImage: "arrow.counterclockwise")
+                }
+            }
+
+            Section("Sound") {
+                Toggle("Play sounds", isOn: $preferences.soundEnabled)
+            }
         }
         .toggleStyle(.switch)
-        .padding()
+        .formStyle(.grouped)
+        .frame(width: 380, height: 300)
+    }
+
+    private func durationStepper(
+        title: String,
+        value: Binding<Int>,
+        range: ClosedRange<Int>,
+        step: Int
+    ) -> some View {
+        Stepper(value: value, in: range, step: step) {
+            HStack {
+                Text(title)
+                Spacer()
+                Text("\(value.wrappedValue) min")
+                    .monospacedDigit()
+                    .foregroundStyle(.secondary)
+                    .frame(width: 56, alignment: .trailing)
+            }
+        }
+        .accessibilityLabel(title)
+        .accessibilityValue("\(value.wrappedValue) minutes")
     }
 }
